@@ -1,0 +1,7 @@
+{
+  "name": "CapstoneTravelApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
