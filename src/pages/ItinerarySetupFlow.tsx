@@ -1,31 +1,35 @@
 import React from 'react';
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon, IonItem, IonLabel } from '@ionic/react'
+import { IonDatetime, IonInput, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon, IonItem, IonLabel } from '@ionic/react'
 
 const CardExample: React.FC = () => (
     <IonContent>
         <IonCard>
             <IonCardHeader>
-                <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-                <IonCardTitle>Card Title</IonCardTitle>
+                <IonCardSubtitle>Location</IonCardSubtitle>
+                <IonCardTitle>Enter Location</IonCardTitle>    
             </IonCardHeader>
-
             <IonCardContent>
-                Keep close to Nature's heart... and break clear away, once in awhile,
-                and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                <IonInput placeholder="Enter Location"></IonInput>
       </IonCardContent>
         </IonCard>
 
         <IonCard>
-            <IonItem>
-                <IonIcon name="pin" slot="start" />
-                <IonLabel>ion-item in a card, icon left, button right</IonLabel>
-                <IonButton fill="outline" slot="end">View</IonButton>
-            </IonItem>
-
+            <IonCardHeader>
+                <IonCardSubtitle>Dates</IonCardSubtitle>
+                <IonCardTitle>Select Dates</IonCardTitle>
+            </IonCardHeader>
             <IonCardContent>
-                This is content, without any paragraph or header tags,
-                within an ion-cardContent element.
-      </IonCardContent>
+                <IonItem>
+                    <IonCardSubtitle>Start Date</IonCardSubtitle>
+                    <IonLabel>MM DD YY</IonLabel>
+                    <IonDatetime displayFormat="MM DD YY" placeholder="Select Date"></IonDatetime>
+                </IonItem>
+                <IonItem>
+                    <IonCardSubtitle>End Date</IonCardSubtitle>
+                    <IonLabel>MM DD YY</IonLabel>
+                    <IonDatetime displayFormat="MM DD YY" placeholder="Select Date"></IonDatetime>
+                </IonItem>
+            </IonCardContent>
         </IonCard>
 
         <IonCard>
