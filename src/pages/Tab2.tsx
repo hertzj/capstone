@@ -9,6 +9,7 @@ import {
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const Tab2: React.FC = () => {
   return (
     <IonPage>
