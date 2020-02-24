@@ -8,7 +8,7 @@ import {
 } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
-import CardExample from './ItinerarySetupFlow'
+import InputForm from './ItinerarySetupFlow'
 
 const Tab1: React.FC = () => {
   return (
@@ -16,7 +16,6 @@ const Tab1: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Tab 1</IonTitle>
-          <CardExample />
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -26,7 +25,7 @@ const Tab1: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Tab 1 page" />
-        <CardExample />
+        <InputForm />
       </IonContent>
     </IonPage>
   );
