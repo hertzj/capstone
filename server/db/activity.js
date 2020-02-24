@@ -16,10 +16,10 @@ const Activity = db.define("activity", {
   type: {
     type: STRING,
     allowNull: false
+  },
+  averageRating: {
+    type: ENUM("1", "2", "3", "4", "5")
   }
-  // averageRating: {
-  //   type: ENUM(1, 2, 3, 4, 5)
-  // }
 });
 
 module.exports = Activity;
