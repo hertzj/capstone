@@ -9,8 +9,7 @@ import {
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
 
-import InputForm from './ItinerarySetupFlow'
-
+import InputForm from './ItinerarySetupFlow';
 
 const Tab1: React.FC = () => {
   return (
@@ -18,7 +17,7 @@ const Tab1: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Tab 1</IonTitle>
-          <CardExample />
+          {/* <CardExample /> */}
         </IonToolbar>
       </IonHeader>
       <IonContent>

@@ -1,0 +1,12 @@
+export const NEW_ITINERARY = Symbol('New Itinerary');
+export const EDIT_PLANNING_ITINERARY = Symbol('Edit Planning Itinerary');
+export const SET_TRANSIT_ITINERARY = Symbol('Set Transit Itinerary');
+export const SET_ACTIVITIES = Symbol('Set Activities');
+export const SET_ACTIVITY_INSTANCES = Symbol('Set User Instances');
+export const SET_ITINERARY_ACTIVITIES = Symbol('Set Itinerary Activities');
+export const SELECT_NEW_ACTIVITY = Symbol('select new activity');
+export const DE_SELECT_ACTIVITY = Symbol('deselect activity');
+export const ADD_ITINERARY_ACTIVITY = Symbol('Add Itinerary Activity');
+export const REMOVE_ITINERARY_ACTIVITY = Symbol('Remove Itinerary Activity');
+export const SIGN_IN = Symbol('Sign In');
+export const SIGN_OUT = Symbol('Sign Out');
