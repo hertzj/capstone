@@ -26,7 +26,7 @@ const User = db.define(
         notEmpty: true,
       },
     },
-    City: {
+    city: {
       type: STRING,
       allowNull: true,
     },
