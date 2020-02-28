@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { IonIcon, IonAvatar, IonChip, IonSegment, IonSegmentButton, IonSlides, IonSlide, IonDatetime, IonInput, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonItem, IonLabel } from '@ionic/react'
 
 const slideOpts = {
@@ -106,4 +107,3 @@ const InputForm: React.FC = () => (
 );
 
 export default InputForm
-
