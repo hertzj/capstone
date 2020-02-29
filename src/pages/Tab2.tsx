@@ -1,8 +1,22 @@
 import React from 'react';
-import { IonReorderGroup, IonPage, IonIcon, IonItem, IonLabel, IonReorder, IonContent, IonImg } from '@ionic/react';
+import { IonReorderGroup, IonPage, IonItem, IonLabel, IonReorder, IonContent, IonImg, IonNote } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 //import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
+const itinerary = [{
+  id: 12,
+  location: "Times Square",
+  type: "SightSeeing",
+  averageRating: 2,
+  imgUrl: "https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg"
+},
+  {
+    id: 14,
+    location: "Central Park",
+    type: "SightSeeing",
+    averageRating: 2,
+    imgUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Central_Park_-_The_Pond_%2848377220157%29.jpg/1200px-Central_Park_-_The_Pond_%2848377220157%29.jpg"
+  }]
 
 function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
   // The `from` and `to` properties contain the index of the item
@@ -19,65 +33,37 @@ const Tab2: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        {/*-- The reorder gesture is disabled by default, enable it to drag and drop items --*/}
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
-          {/*-- Default reorder icon, end aligned items --*/}
-          <IonItem>
-            <IonImg src={"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lonelyplanet.com%2Fusa%2Fhawaii&psig=AOvVaw2wmStOx1XrCWYatqVojzpm&ust=1582855740616000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLC1k6TT8OcCFQAAAAAdAAAAABAD"}></IonImg>
-            <IonLabel>Item 1</IonLabel>
+          {/* {
+            itinerary.map(location => {
+              return (<IonItem>
+                <IonImg src={location.imgUrl}></IonImg>
+                <IonLabel>{location.location}</IonLabel>
+                <IonReorder slot="end" />
+              </IonItem>);
+            }
+            )
+          } */}
+        <IonItem>
+            <IonLabel color="primary">Times Square</IonLabel><br />
+              <IonLabel color="secondary">Start Time</IonLabel><br />
+                <IonLabel color="secondary">End Time</IonLabel><br />
+               <IonLabel color="light">Light Label</IonLabel>
+            <IonImg src="https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg" />
             <IonReorder slot="end" />
-          </IonItem>
-
-          
-
+            <IonLabel color="dark">Commute Time</IonLabel>
+          </IonItem>;
           <IonItem>
-            <IonLabel>Item 2</IonLabel>
+            <IonLabel color="primary">Central Park</IonLabel>
+            <IonLabel color="secondary">Start Time</IonLabel>
+            <IonLabel color="secondary">End Time</IonLabel>
+            <IonImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Central_Park_-_The_Pond_%2848377220157%29.jpg/1200px-Central_Park_-_The_Pond_%2848377220157%29.jpg" />
             <IonReorder slot="end" />
-          </IonItem>
-
-          {/*-- Default reorder icon, start aligned items --*/}
-          <IonItem>
-            <IonReorder slot="start" />
-            <IonLabel>Item 3</IonLabel>
-          </IonItem>
-
-          <IonItem>
-            <IonReorder slot="start" />
-            <IonLabel>Item 4</IonLabel>
-          </IonItem>
-
-          {/*-- Custom reorder icon end items --*/}
-          <IonItem>
-            <IonLabel>Item 5</IonLabel>
-            <IonReorder slot="end">
-              <IonIcon name="pizza" />
-            </IonReorder>
-          </IonItem>
-
-          <IonItem>
-            <IonLabel>Item 6</IonLabel>
-            <IonReorder slot="end">
-              <IonIcon name="pizza" />
-            </IonReorder>
-          </IonItem>
-
-          {/*-- Items wrapped in a reorder, entire item can be dragged --*/}
-          <IonReorder>
-            <IonItem>
-              <IonLabel>Item 7</IonLabel>
-            </IonItem>
-          </IonReorder>
-
-          <IonReorder>
-            <IonItem>
-              <IonLabel>Item 8</IonLabel>
-            </IonItem>
-          </IonReorder>
+          </IonItem>;
         </IonReorderGroup>
       </IonContent>
-
-    </IonPage>
-  );
+  </IonPage>
+  )
 };
 
 export default Tab2;

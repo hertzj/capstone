@@ -1,34 +1,25 @@
-const Sequelize = require('sequelize');
-const db = require('./database');
+const Sequelize = require("sequelize");
+const db = require("./database");
 
 const { STRING, UUID, UUIDV4, DECIMAL, GEOMETRY, TIME, ENUM } = Sequelize;
 
-const Activity = db.define('activity', {
+const Activity = db.define("activity", {
   id: {
     type: UUID,
     defaultValue: UUIDV4,
-    primaryKey: true,
+    primaryKey: true
   },
   location: {
-    type: GEOMETRY('POINT'),
-    allowNull: false,
+    type: GEOMETRY("POINT"),
+    allowNull: false
   },
   type: {
     type: STRING,
-    allowNull: false,
+    allowNull: false
   },
-  startTime: {
-    type: TIME,
-  },
-  endTime: {
-    type: TIME,
-  },
-  duration: {
-    type: DECIMAL(10, 2), // I think the best way to calculate duration is in quarter hours
-  },
-  rating: {
-    type: ENUM(1, 2, 3, 4, 5),
-  },
+  averageRating: {
+    type: ENUM("1", "2", "3", "4", "5")
+  }
 });
 
 module.exports = Activity;
