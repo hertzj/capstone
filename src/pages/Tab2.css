@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Catamaran&display=swap');
+
+*{
+  font-family: 'Catamaran'!important ;
+}
 ion-content ion-toolbar {
   --background: translucent;
+}
+ion-reorder{
+
+}
+ion-img{
+width:25%;
+height:auto;
+border-radius: 50%
+}
+ion-item{
+border-style: none;
+margin-bottom: 50px;
+font-family:'Satisfy' !important;
 }

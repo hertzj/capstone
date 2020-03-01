@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IonSegment, IonSegmentButton, IonSlides, IonSlide, IonDatetime, IonInput, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonItem, IonLabel } from '@ionic/react'
+import { IonIcon, IonAvatar, IonChip, IonSegment, IonSegmentButton, IonSlides, IonSlide, IonDatetime, IonInput, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonItem, IonLabel } from '@ionic/react'
 
 const slideOpts = {
     initialSlide: 1,
@@ -21,6 +21,7 @@ const InputForm: React.FC = () => (
                     </IonCardContent>
                 </IonCard>
             </IonSlide>
+        
             <IonSlide>
                 <IonCard>
                     <IonCardHeader>
@@ -30,14 +31,14 @@ const InputForm: React.FC = () => (
                     <IonCardContent>
                         <IonItem>
 
-                            <IonCardSubtitle>Start Date</IonCardSubtitle>
-                            <IonLabel>MM DD YY</IonLabel>
+                            <IonCardSubtitle>Start Date and Time</IonCardSubtitle>
                             <IonDatetime displayFormat="MM DD YY" placeholder="Select Date"></IonDatetime>
+                            <IonDatetime displayFormat="HH:mm" placeholder="Select Time"></IonDatetime>
                         </IonItem>
                         <IonItem>
-                            <IonCardSubtitle>End Date</IonCardSubtitle>
-                            <IonLabel>MM DD YY</IonLabel>
+                            <IonCardSubtitle>End Date and Time</IonCardSubtitle>
                             <IonDatetime displayFormat="MM DD YY" placeholder="Select Date"></IonDatetime>
+                            <IonDatetime displayFormat="HH:mm" placeholder="Select Time"></IonDatetime>
                         </IonItem>
                     </IonCardContent>
                 </IonCard>
@@ -58,12 +59,49 @@ const InputForm: React.FC = () => (
                     </IonSegment>
                 </IonCard>
             </IonSlide>
+            <IonSlide>
+                <IonChip>
+                    <IonLabel>Default</IonLabel>
+                </IonChip>
+
+                <IonChip>
+                    <IonLabel color="secondary">Secondary Label</IonLabel>
+                </IonChip>
+
+                <IonChip color="secondary">
+                    <IonLabel color="dark">Secondary w/ Dark label</IonLabel>
+                </IonChip>
+
+                <IonChip>
+                    <IonIcon name="pin" />
+                    <IonLabel>Default</IonLabel>
+                </IonChip>
+
+                <IonChip>
+                    <IonIcon name="heart" color="dark"/>
+                    <IonLabel>Default</IonLabel>
+                </IonChip>
+
+                <IonChip>
+                    <IonLabel>Button Chip</IonLabel>
+                    <IonIcon name="close-circle" />
+                </IonChip>
+
+                <IonChip>
+                    <IonIcon name="pin" color="primary" />
+                    <IonLabel>Icon Chip</IonLabel>
+                    <IonIcon name="close" />
+                </IonChip>
+
+                <IonChip>
+                    <IonAvatar>
+                        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                    </IonAvatar>
+                    <IonLabel>Avatar Chip</IonLabel>
+                    <IonIcon name="close-circle" />
+                </IonChip>
+            </IonSlide>
         </IonSlides>
-
-
-
-       
-       
         
     </IonContent>
 );
