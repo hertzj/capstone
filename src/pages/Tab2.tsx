@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonReorderGroup, IonPage, IonItem, IonLabel, IonReorder, IonContent, IonImg, IonNote } from '@ionic/react';
+import { IonReorderGroup, IonPage, IonItem, IonLabel, IonReorder, IonContent, IonImg } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 //import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
@@ -29,7 +29,7 @@ function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
   event.detail.complete();
 }
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const Tab2: React.FC = () => {
+const Tab2: React.FC = (itinerary) => {
   return (
     <IonPage>
       <IonContent>
@@ -48,18 +48,17 @@ const Tab2: React.FC = () => {
             <IonLabel color="primary">Times Square</IonLabel><br />
               <IonLabel color="secondary">Start Time</IonLabel><br />
                 <IonLabel color="secondary">End Time</IonLabel><br />
-               <IonLabel color="light">Light Label</IonLabel>
+             
             <IonImg src="https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg" />
             <IonReorder slot="end" />
-            <IonLabel color="dark">Commute Time</IonLabel>
-          </IonItem>;
+          </IonItem>
           <IonItem>
             <IonLabel color="primary">Central Park</IonLabel>
             <IonLabel color="secondary">Start Time</IonLabel>
             <IonLabel color="secondary">End Time</IonLabel>
             <IonImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Central_Park_-_The_Pond_%2848377220157%29.jpg/1200px-Central_Park_-_The_Pond_%2848377220157%29.jpg" />
             <IonReorder slot="end" />
-          </IonItem>;
+          </IonItem>
         </IonReorderGroup>
       </IonContent>
   </IonPage>
