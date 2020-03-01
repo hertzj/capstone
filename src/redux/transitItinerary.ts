@@ -14,6 +14,7 @@ export const placeTransitItinerary = (
 
 // we will want to edit this, but really through automation in response to our algo
 
+// might want other things in our itinerary
 const initialState = {
   name: '',
   date: null,

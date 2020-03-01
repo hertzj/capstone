@@ -20,7 +20,24 @@ interface ActivityInstanceAction {
   activity?: ItineraryActivity | Activity;
 }
 
+// export interface ItineraryActivity {
+//   id: string;
+//   startTime: string;
+//   endTime: string;
+//   date: Date;
+//   plannedDuration: number;
+//   actualDuration: number;
+//   rating: number | null;
+//   activityId?: string;
+//   itineraryId?: string;
+// }
+
 export interface ItineraryActivity {
+  type: string;
+  details: Details | TravelDetails;
+}
+
+interface Details {
   id: string;
   startTime: string;
   endTime: string;
@@ -30,6 +47,12 @@ export interface ItineraryActivity {
   rating: number | null;
   activityId?: string;
   itineraryId?: string;
+}
+
+interface TravelDetails {
+  id: string;
+  walk: boolean;
+  duration: number;
 }
 
 export const selectActivity = (activity: Activity): ActivityInstanceAction => {
@@ -87,7 +110,8 @@ const transformActivityToItineraryActivity = (
     // 2) then create ItineraryActivities
     const itineraryActivities = activities.map((activity: Activity) => {
       // could make the UUID for the id here as well with the UUID NPM library
-      const itineraryActivity: ItineraryActivity = {
+
+      const itineraryDetails: Details = {
         id: uuidv4(),
         startTime: '',
         endTime: '',
@@ -98,6 +122,10 @@ const transformActivityToItineraryActivity = (
         activityId: activity.id,
         //@ts-ignore
         itineraryId: getState().planningItinerary.id,
+      };
+      const itineraryActivity: ItineraryActivity = {
+        type: 'travel',
+        details: itineraryDetails,
       };
       return itineraryActivity;
     });
@@ -145,7 +173,7 @@ const activityInstanceReducer = (
         ...state,
         selectedActivities: state.selectedActivities.filter(
           (activity: Activity) => {
-            if (action.activity) {
+            if (action.activity && 'id' in action.activity) {
               return activity.id !== action.activity.id;
             }
           }
@@ -166,8 +194,8 @@ const activityInstanceReducer = (
         ...state,
         itineraryActivities: state.itineraryActivities.filter(
           (activity: ItineraryActivity) => {
-            if (action.activity) {
-              return activity.id !== action.activity.id;
+            if (action.activity && 'details' in action.activity) {
+              return activity.details.id !== action.activity.details.id;
             }
           }
         ),
