@@ -6,13 +6,14 @@ import { ThunkAction } from 'redux-thunk';
 import { RootState } from './index';
 //@ts-ignore
 import Geocode from 'react-geocode';
-import { googleAPIKey } from '../../secrets.js';
+import { googleAPIKey } from '../secrets';
+import axios from 'axios';
 
 export interface ItineraryAction {
   type: symbol;
   id?: string;
   name?: string;
-  city?: string;
+  locationName?: string;
   date?: Date; // be careful here
   budget?: string;
   startLocation?: string;
@@ -28,7 +29,7 @@ export interface Itinerary {
   id?: string;
   name: string;
   date: Date;
-  city: string;
+  locationName: string;
   budget: string;
   startLocation: string;
   endLocation: string;
@@ -57,6 +58,10 @@ export const editedToPlanningItinerary = (
       editsToSend.name = edits;
     case 'date':
       editsToSend.date = edits;
+    case 'locationName':
+      editsToSend.locationName = edits;
+    case 'budget':
+      editsToSend.budget = edits;
     case 'startLocation':
       editsToSend.startLocation = edits;
     case 'endLocation':
@@ -65,6 +70,8 @@ export const editedToPlanningItinerary = (
       editsToSend.startTime = edits;
     case 'endTime':
       editsToSend.endTime = edits;
+    case 'tags': // might be more complicated due to it being an array
+      editsToSend.tags = edits;
     default:
       editsToSend.type = null;
   }
@@ -104,6 +111,10 @@ export const createNewItinerary = (
         console.log('error creating start lat and lng');
         console.error(e);
       });
+    const transitItinerary = (
+      await axios.post(`/intineraries/newActivities/${getState().user.id}`)
+    ).data;
+    console.log('response from post: ', transitItinerary);
     // post itinerary with the tags
     // NEXT TO DO - console.log the response
     // I want back the activities instances a user selects from
@@ -117,7 +128,7 @@ export const createNewItinerary = (
 const initialState = {
   name: '',
   date: new Date(),
-  city: '',
+  locationName: '',
   budget: '',
   startLocation: '',
   endLocation: '',
@@ -130,10 +141,13 @@ const initialState = {
 const planningReducer = (state = initialState, action: ItineraryAction) => {
   const name = action.name;
   const date = action.date;
+  const locationName = action.locationName;
+  const budget = action.budget;
   const startLocation = action.startLocation;
   const endLocation = action.endLocation;
   const startTime = action.startTime;
   const endTime = action.endTime;
+  const tats = action.tags;
   const activities = action.activities;
   switch (action.type) {
     case NEW_ITINERARY:
