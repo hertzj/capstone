@@ -7,7 +7,7 @@ interface User {
   lastName: string;
   city?: string;
   email: string;
-  password: string; // need to check if we want this here or not; prob not unless encrypted
+  password: string; // this is safe since password is hashed
 }
 
 interface UserAction {
@@ -24,7 +24,12 @@ const initialState: User = {
   password: '',
 };
 
-// when sign in populate info
+export const setUser = (user: User): UserAction => {
+  return {
+    type: SIGN_IN,
+    user,
+  };
+};
 
 // might want a sign in case as well; though could be sipler to have the sign in thunk return the set user action creator
 const userReducer = (state = initialState, action: UserAction) => {

@@ -1,3 +1,4 @@
+// I THINK WE DO NOT NEED THIS ANYMORE
 import { SET_ACTIVITIES } from './constants';
 // import { v4 } from 'uuid/interfaces';
 import { Action } from 'redux';
