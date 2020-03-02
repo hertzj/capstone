@@ -3,6 +3,7 @@
 *{
   font-family: 'Catamaran'!important ;
 }
+
 ion-content ion-toolbar {
   --background: translucent;
 }
@@ -16,6 +17,5 @@ border-radius: 50%
 }
 ion-item{
 border-style: none;
-margin-bottom: 50px;
 font-family:'Satisfy' !important;
 }
