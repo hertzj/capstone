@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -13,6 +13,7 @@ import {
   IonItem,
   IonButton,
   IonRouterLink,
+  useIonViewWillEnter,
 } from '@ionic/react';
 import { signInThunk, initialLogInAttempt } from '../redux/user';
 
@@ -21,7 +22,7 @@ const SignInForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useIonViewWillEnter(() => {
     dispatch(initialLogInAttempt());
     // need to redirect if this is true
   });
