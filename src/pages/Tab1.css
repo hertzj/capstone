@@ -35,3 +35,6 @@ ion-content ion-toolbar {
       color: var(--ion-text-color, #000000);
     }
 
+.ion-card-title{
+  padding: 20px;
+}

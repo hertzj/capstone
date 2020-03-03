@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonReorderGroup, IonPage, IonItem, IonLabel, IonReorder, IonContent, IonImg } from '@ionic/react';
+import { IonReorderGroup, IonPage, IonItem, IonLabel, IonReorder, IonContent, IonImg, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 //import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
@@ -32,6 +32,11 @@ function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
 const Tab2: React.FC = (itinerary) => {
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Current Itinerary</IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
           {/* {
