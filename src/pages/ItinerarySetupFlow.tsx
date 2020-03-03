@@ -55,7 +55,7 @@ const InputForm: React.FC = () => {
   const [budget, setBudget] = useState('');
   const [locationName, setLocationName] = useState('');
   const [startLocation, setStartLocation] = useState('');
-  const [endLocation, setEndLocation] = useState('');
+  let [endLocation, setEndLocation] = useState('');
   const [tags, setTags] = useState(tagsInitialState);
   const [showTags, setShowTags] = useState(form);
   const [startTime, setStartTime] = useState('');
@@ -67,8 +67,8 @@ const InputForm: React.FC = () => {
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (endLocation === '') {
-      setEndLocation(startLocation);
+    if (!endLocation.length) {
+      endLocation = startLocation;
     }
     const itinerary = {
       name,
