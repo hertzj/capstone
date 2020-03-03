@@ -19,6 +19,10 @@ import {
   IonIcon,
   IonList,
   IonCheckbox,
+  IonInput,
+  IonTitle,
+  IonDatetime,
+  IonButton,
 } from '@ionic/react';
 
 interface Tag {
@@ -31,7 +35,7 @@ const InputForm: React.FC = () => {
   const form = [
     { text: 'Art', val: 'art', isChecked: false },
     { text: 'Child-Friendly', val: 'character-Kid_friendly', isChecked: false },
-    { text: 'Food', val: 'food', isChecked: false },
+    { text: 'Food', val: 'eatingout', isChecked: false },
     { text: 'Cafe', val: 'poitype-Cafe', isChecked: false },
     { text: 'Night Life', val: 'nightlife', isChecked: false },
     { text: 'Outdoor Activities', val: 'exploringnature', isChecked: false },
@@ -53,7 +57,7 @@ const InputForm: React.FC = () => {
   // consider moment here
   const [date, setDate] = useState(new Date());
   const itinerary = {
-    //   name,
+    // name,
     date,
     locationName,
     budget,
@@ -67,8 +71,14 @@ const InputForm: React.FC = () => {
     <IonContent>
       <form>
         <IonCard>
+            <IonItem>
+                <IonLabel position="floating" class="card_title">Itinerary Name</IonLabel>
+                <IonInput></IonInput>
+            </IonItem>
+        </IonCard>
+        <IonCard>
           <IonCardHeader>
-            <IonCardTitle>Location</IonCardTitle>
+            <IonCardTitle>City</IonCardTitle>
             <IonSelect
               interface="popover"
               placeholder="Select Location"
@@ -76,7 +86,7 @@ const InputForm: React.FC = () => {
                 setLocationName(e.detail.value);
               }}
             >
-              <IonSelectOption value="New New_York_City">
+              <IonSelectOption value="New_York_City">
                 New York
               </IonSelectOption>
               <IonSelectOption value="Bangkok">Bangkok</IonSelectOption>
@@ -93,6 +103,12 @@ const InputForm: React.FC = () => {
           </IonCardHeader>
         </IonCard>
         <IonCard>
+            <IonLabel position="floating">Starting Location</IonLabel>
+            <IonInput></IonInput>
+            <IonLabel position="floating">End Location</IonLabel>
+            <IonInput></IonInput>
+        </IonCard>
+        <IonCard>
           <IonCardHeader>
             <IonCardTitle>Dates</IonCardTitle>
           </IonCardHeader>
@@ -106,6 +122,14 @@ const InputForm: React.FC = () => {
                 value={date}
               />
             </IonItem>
+                <IonItem>
+                    <IonLabel>Start Time</IonLabel>
+                    <IonDatetime displayFormat="h:mm A"></IonDatetime>
+                </IonItem>
+                <IonItem>
+                    <IonLabel>End Time</IonLabel>
+                    <IonDatetime displayFormat="h:mm A"></IonDatetime>
+                 </IonItem>        
           </IonCardContent>
         </IonCard>
 
@@ -169,6 +193,7 @@ const InputForm: React.FC = () => {
             ))}
           </IonList>
         </IonCard>
+            <IonButton expand="block">Create Itinerary</IonButton>
       </form>
     </IonContent>
   );
