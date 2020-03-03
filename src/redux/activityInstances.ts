@@ -143,7 +143,7 @@ const transformActivityToItineraryActivity = (
   };
 };
 
-interface ActivityInstanceState {
+export interface ActivityInstanceState {
   selectedActivities: Activity[];
   itineraryActivities: ItineraryActivity[];
 }

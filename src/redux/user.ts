@@ -1,7 +1,8 @@
 import { SIGN_IN, SIGN_OUT } from './constants';
 import { v4 } from 'uuid/interfaces';
+import { Reducer, Action } from 'redux';
 
-interface User {
+export interface User {
   id: v4 | null;
   firstName: string;
   lastName: string;
@@ -32,7 +33,10 @@ export const setUser = (user: User): UserAction => {
 };
 
 // might want a sign in case as well; though could be sipler to have the sign in thunk return the set user action creator
-const userReducer = (state = initialState, action: UserAction) => {
+const userReducer: Reducer<User, UserAction> = (
+  state = initialState,
+  action: UserAction
+) => {
   switch (action.type) {
     case SIGN_IN:
       return action.user;
