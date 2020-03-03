@@ -22,6 +22,7 @@ import {
   IonInput,
   IonTitle,
   IonDatetime,
+  IonButton,
 } from '@ionic/react';
 
 interface Tag {
@@ -71,7 +72,7 @@ const InputForm: React.FC = () => {
       <form>
         <IonCard>
             <IonItem>
-                <IonLabel position="floating">Itinerary Name</IonLabel>
+                <IonLabel position="floating" class="card_title">Itinerary Name</IonLabel>
                 <IonInput></IonInput>
             </IonItem>
         </IonCard>
@@ -192,6 +193,7 @@ const InputForm: React.FC = () => {
             ))}
           </IonList>
         </IonCard>
+            <IonButton expand="block">Create Itinerary</IonButton>
       </form>
     </IonContent>
   );
