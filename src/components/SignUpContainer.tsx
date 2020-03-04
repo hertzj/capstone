@@ -63,7 +63,7 @@ const SignUpContainer: React.FC = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={e => submit(e)}>
       <IonList>
         <IonItem>
           <IonLabel>First Name</IonLabel>
