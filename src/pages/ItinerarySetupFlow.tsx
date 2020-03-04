@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 // import * as moment from 'moment';
 
 import {
@@ -25,6 +26,7 @@ import {
   IonDatetime,
   IonButton,
 } from '@ionic/react';
+import { createNewItinerary } from '../redux/planningItinerary';
 
 interface Tag {
   text: string;
@@ -50,6 +52,7 @@ const InputForm: React.FC = () => {
     { text: 'Sightseeing', val: 'sightseeing', isChecked: false },
     { text: 'Top Attractions', val: 'topattractions', isChecked: false },
   ];
+  const dispatch = useDispatch();
   const tagsInitialState: string[] = [];
   const [name, setName] = useState('');
   const [budget, setBudget] = useState('');
@@ -62,8 +65,6 @@ const InputForm: React.FC = () => {
   const [endTime, setEndTime] = useState('');
   // consider moment here
   const [date, setDate] = useState(new Date());
-
-  // TO DO: on submit, if endLocation is empty, make it startLocation
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -81,7 +82,8 @@ const InputForm: React.FC = () => {
       endTime,
       tags,
     };
-    console.log('itinerary on submit: ', itinerary);
+    // console.log('itinerary on submit: ', itinerary);
+    dispatch(createNewItinerary(itinerary));
   };
 
   return (

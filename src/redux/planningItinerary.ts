@@ -1,5 +1,9 @@
-import { NEW_ITINERARY, EDIT_PLANNING_ITINERARY } from './constants';
-import { ItineraryActivity } from './activityInstances';
+import {
+  NEW_ITINERARY,
+  EDIT_PLANNING_ITINERARY,
+  TYPE_ACTIVITY,
+} from './constants';
+import { ItineraryActivity, setItineraryActivities } from './activityInstances';
 // import { v4 } from 'uuid/interfaces';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
@@ -39,7 +43,9 @@ export interface Itinerary {
   activities?: ItineraryActivity[];
 }
 
-export const newItinerary = (itinerary: Itinerary): ItineraryAction => {
+export const newItineraryActionCreator = (
+  itinerary: Itinerary
+): ItineraryAction => {
   return {
     type: NEW_ITINERARY,
     itinerary,
@@ -86,42 +92,74 @@ export const createNewItinerary = (
   itinerary: Itinerary
 ): ThunkAction<void, RootState, unknown, Action> => {
   return async (dispatch, getState) => {
-    // do the thing
-    // post itinerary and get its data
-    // dispatch(newItinerary(postedItinerary))
     Geocode.setApiKey(googleAPIKey);
-    const { startLocation, endLocation } = itinerary;
-    Geocode.fromAddress(startLocation)
+    const { startLocation, endLocation, budget } = itinerary;
+    let newBudget = '';
+    switch (budget) {
+      case '$':
+        newBudget = 'budget';
+        break;
+      case '$$':
+        newBudget = 'mid_range';
+        break;
+      case '$$$':
+        newBudget = 'splurge';
+        break;
+      default:
+        newBudget = 'mid_range';
+    }
+    itinerary.budget = newBudget;
+    await Geocode.fromAddress(startLocation)
       .then((res: any) => {
         const { lat, lng } = res.results[0].geometry.location;
-        console.log('lat and lng of start: ', lat, lng);
         itinerary.startLocation = `${lat},${lng}`;
       })
       .catch((e: any) => {
         console.log('error creating start lat and lng');
         console.error(e);
       });
-    Geocode.fromAddress(endLocation)
+    await Geocode.fromAddress(endLocation)
       .then((res: any) => {
         const { lat, lng } = res.results[0].geometry.location;
-        console.log('lat and lng of end: ', lat, lng);
         itinerary.endLocation = `${lat},${lng}`;
       })
       .catch((e: any) => {
         console.log('error creating start lat and lng');
         console.error(e);
       });
-    const transitItinerary = (
-      await axios.post(`/intineraries/newActivities/${getState().user.id}`)
-    ).data;
-    console.log('response from post: ', transitItinerary);
+
     // post itinerary with the tags
     // NEXT TO DO - console.log the response
     // I want back the activities instances a user selects from
-    //
     // and the new transit iterinary
+
+    // res.status(200).json({
+    //   newItinerary,
+    //   activityInstances: newActivityInstances,
+    // })
+    const newTransitData = (
+      await axios.post(
+        `http://sota-server.herokuapp.com/api/itineraries/newActivities/${
+          getState().user.id
+        }`,
+        itinerary
+      )
+    ).data;
+    const { newItinerary, activityInstances } = newTransitData;
+
+    dispatch(newItineraryActionCreator(newItinerary));
     // dispatch activity instances
-    // dispatch the transit itinerary
+
+    const arrayToMapFrom = new Array(activityInstances.length).fill('');
+
+    const instancesToDispatch = arrayToMapFrom.map((el, idx) => {
+      return {
+        type: TYPE_ACTIVITY,
+        details: activityInstances[idx],
+      };
+    });
+
+    dispatch(setItineraryActivities(instancesToDispatch));
   };
 };
 

@@ -10,3 +10,5 @@ export const ADD_ITINERARY_ACTIVITY = Symbol('Add Itinerary Activity');
 export const REMOVE_ITINERARY_ACTIVITY = Symbol('Remove Itinerary Activity');
 export const SIGN_IN = Symbol('Sign In');
 export const SIGN_OUT = Symbol('Sign Out');
+export const TYPE_ACTIVITY = 'ACTIVITY';
+export const TYPE_TRANSIT = 'TRANSIT';
