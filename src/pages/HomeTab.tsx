@@ -28,7 +28,9 @@ const HomeTab: React.FC = () => {
         </IonCard>
       </IonItem>
       <IonTitle>Add Itinerary</IonTitle>
+      <IonItem>
       <IonIcon icon={addCircleOutline} size="large" />
+      </IonItem>
     </IonPage>
   );
 };
