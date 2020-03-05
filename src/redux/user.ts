@@ -10,7 +10,7 @@ const { Storage } = Plugins;
 const storageKey = 'sota_token';
 
 export interface User {
-  id: v4 | null; // might be string;
+  id?: v4 | null; // might be string;
   firstName: string;
   lastName: string;
   city?: string;
