@@ -29,6 +29,7 @@ const Tab1: React.FC = () => {
         <InputForm />
       </IonContent>
     </IonPage>
+
   );
 };
 

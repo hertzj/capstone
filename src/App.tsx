@@ -13,6 +13,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { addCircleOutline, paperPlane, person, home } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
+import InputForm from './pages/ItinerarySetupFlow'
 import Tab3 from './pages/Tab3';
 import HomeTab from './pages/HomeTab';
 import SignInForm from './pages/SignIn';
@@ -55,10 +56,6 @@ const App: React.FC = () => (
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={home} />
             <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={addCircleOutline} />
-            <IonLabel>Create Itinerary</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
             <IonIcon icon={paperPlane} />
