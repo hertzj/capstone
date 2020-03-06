@@ -38,8 +38,12 @@ export interface Itinerary {
   date: Date;
   locationName: string;
   budget: string;
-  startLocation: string;
-  endLocation: string;
+  startLocation?: string;
+  endLocation?: string;
+  startLocationLat?: number;
+  startLocationLong?: number;
+  endLocationLat?: number;
+  endLocationLong?: number;
   startTime: string;
   endTime: string;
   tags: string[];
@@ -130,7 +134,7 @@ export const createNewItinerary = (
     const newTransitData = (
       await axios.post(
         `http://sota-server.herokuapp.com/api/itineraries/newActivities/${
-        getState().user.id
+          getState().user.id
         }`,
         itinerary
       )
