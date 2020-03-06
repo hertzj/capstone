@@ -130,7 +130,7 @@ export const createNewItinerary = (
     const newTransitData = (
       await axios.post(
         `http://sota-server.herokuapp.com/api/itineraries/newActivities/${
-          getState().user.id
+        getState().user.id
         }`,
         itinerary
       )
@@ -153,10 +153,10 @@ export const createNewItinerary = (
 
     // WILL NOT WORK YET
     // might need to massage the data
-    const { newItinerary, scheduled, options } = newTransitData;
+    const { newItinerary, scheduledActivities, otherOptions } = newTransitData;
     dispatch(newItineraryActionCreator(newItinerary));
-    dispatch(setScheduledActivities(scheduled));
-    dispatch(setOtherOptions(options));
+    dispatch(setScheduledActivities(scheduledActivities));
+    dispatch(setOtherOptions(otherOptions));
   };
 };
 
