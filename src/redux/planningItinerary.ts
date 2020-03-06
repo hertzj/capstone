@@ -3,8 +3,11 @@ import {
   EDIT_PLANNING_ITINERARY,
   TYPE_ACTIVITY,
 } from './constants';
-import { ItineraryActivity, setItineraryActivities } from './activityInstances';
-// import { v4 } from 'uuid/interfaces';
+import {
+  ItineraryActivity,
+  setScheduledActivities,
+  setOtherOptions,
+} from './activityInstances';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from './index';
@@ -84,10 +87,6 @@ export const editedToPlanningItinerary = (
   return editsToSend;
 };
 
-// write thunks and action creators
-
-// new itinerary thunk
-
 export const createNewItinerary = (
   itinerary: Itinerary
 ): ThunkAction<void, RootState, unknown, Action> => {
@@ -128,15 +127,6 @@ export const createNewItinerary = (
         console.error(e);
       });
 
-    // post itinerary with the tags
-    // NEXT TO DO - console.log the response
-    // I want back the activities instances a user selects from
-    // and the new transit iterinary
-
-    // res.status(200).json({
-    //   newItinerary,
-    //   activityInstances: newActivityInstances,
-    // })
     const newTransitData = (
       await axios.post(
         `http://sota-server.herokuapp.com/api/itineraries/newActivities/${
@@ -145,21 +135,28 @@ export const createNewItinerary = (
         itinerary
       )
     ).data;
-    const { newItinerary, activityInstances } = newTransitData;
 
+    // commenting out old way, just to remember pattern for now
+    // const { newItinerary, activityInstances } = newTransitData;
+    // dispatch(newItineraryActionCreator(newItinerary));
+
+    // const arrayToMapFrom = new Array(activityInstances.length).fill('');
+
+    // const instancesToDispatch = arrayToMapFrom.map((el, idx) => {
+    //   return {
+    //     type: TYPE_ACTIVITY,
+    //     details: activityInstances[idx],
+    //   };
+    // });
+
+    // dispatch(setItineraryActivities(instancesToDispatch));
+
+    // WILL NOT WORK YET
+    // might need to massage the data
+    const { newItinerary, scheduled, options } = newTransitData;
     dispatch(newItineraryActionCreator(newItinerary));
-    // dispatch activity instances
-
-    const arrayToMapFrom = new Array(activityInstances.length).fill('');
-
-    const instancesToDispatch = arrayToMapFrom.map((el, idx) => {
-      return {
-        type: TYPE_ACTIVITY,
-        details: activityInstances[idx],
-      };
-    });
-
-    dispatch(setItineraryActivities(instancesToDispatch));
+    dispatch(setScheduledActivities(scheduled));
+    dispatch(setOtherOptions(options));
   };
 };
 

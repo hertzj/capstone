@@ -1,11 +1,4 @@
-import {
-  SET_ACTIVITY_INSTANCES,
-  SELECT_NEW_ACTIVITY,
-  DE_SELECT_ACTIVITY,
-  ADD_ITINERARY_ACTIVITY,
-  REMOVE_ITINERARY_ACTIVITY,
-  SET_ITINERARY_ACTIVITIES,
-} from './constants';
+import { SET_OTHER_OPTIONS, SET_SCHEDULED_ACTIVITIES } from './constants';
 // import { v4 } from 'uuid/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 import { Reducer, Action } from 'redux';
@@ -15,89 +8,76 @@ import { Activity } from './activites';
 
 interface ActivityInstanceAction {
   type: symbol;
-  selectedActivities?: Activity[];
-  itineraryActivities?: ItineraryActivity[];
-  activity?: ItineraryActivity | Activity;
+  scheduledActivities?: ItineraryActivity[];
+  otherOptions?: ItineraryActivity[];
 }
-
-// export interface ItineraryActivity {
-//   id: string;
-//   startTime: string;
-//   endTime: string;
-//   date: Date;
-//   plannedDuration: number;
-//   actualDuration: number;
-//   rating: number | null;
-//   activityId?: string;
-//   itineraryId?: string;
-// }
 
 export interface ItineraryActivity {
-  type: string;
-  details: Details | TravelDetails;
-}
-
-interface Details {
+  activity: boolean;
+  types: string | string[];
   id: string;
-  name: string;
-  locationLat: number;
-  locationLong: number;
+  name?: string;
+  locationLat?: number;
+  locationLong?: number;
   startTime: string | null; // not null eventually
   endTime: string | null; // not null eventually
-  date: Date | null; // not null eventually
-  images: string[];
-  actualDuration: number | null; // or default to planned and then edit?
+  date: Date | null | string; // figure out which
+  images?: string[];
+  distance?: number;
   duration: number;
-  rating: number | null;
+  walk?: boolean;
   itineraryId?: string;
 }
 
-interface TravelDetails {
-  id: string;
-  walk: boolean;
-  duration: number;
-}
+// export const selectActivity = (activity: Activity): ActivityInstanceAction => {
+//   return {
+//     type: SELECT_NEW_ACTIVITY,
+//     activity,
+//   };
+// };
 
-export const selectActivity = (activity: Activity): ActivityInstanceAction => {
+// export const deSelectActivity = (
+//   activity: Activity
+// ): ActivityInstanceAction => {
+//   return {
+//     type: DE_SELECT_ACTIVITY,
+//     activity,
+//   };
+// };
+
+// export const newItineraryActivity = (
+//   activity: ItineraryActivity
+// ): ActivityInstanceAction => {
+//   return {
+//     type: ADD_ITINERARY_ACTIVITY,
+//     activity,
+//   };
+// };
+
+// export const removeItineraryActivity = (
+//   activity: ItineraryActivity
+// ): ActivityInstanceAction => {
+//   return {
+//     type: REMOVE_ITINERARY_ACTIVITY,
+//     activity,
+//   };
+// };
+
+export const setScheduledActivities = (
+  scheduledActivities: ItineraryActivity[]
+): ActivityInstanceAction => {
   return {
-    type: SELECT_NEW_ACTIVITY,
-    activity,
+    type: SET_SCHEDULED_ACTIVITIES,
+    scheduledActivities,
   };
 };
 
-export const deSelectActivity = (
-  activity: Activity
+export const setOtherOptions = (
+  otherOptions: ItineraryActivity[]
 ): ActivityInstanceAction => {
   return {
-    type: DE_SELECT_ACTIVITY,
-    activity,
-  };
-};
-
-export const newItineraryActivity = (
-  activity: ItineraryActivity
-): ActivityInstanceAction => {
-  return {
-    type: ADD_ITINERARY_ACTIVITY,
-    activity,
-  };
-};
-
-export const removeItineraryActivity = (
-  activity: ItineraryActivity
-): ActivityInstanceAction => {
-  return {
-    type: REMOVE_ITINERARY_ACTIVITY,
-    activity,
-  };
-};
-
-export const setItineraryActivities = (
-  itineraryActivities: ItineraryActivity[]
-): ActivityInstanceAction => {
-  return {
-    type: SET_ITINERARY_ACTIVITIES,
-    itineraryActivities,
+    type: SET_OTHER_OPTIONS,
+    otherOptions,
   };
 };
 
@@ -146,13 +126,18 @@ export const setItineraryActivities = (
 // };
 
 export interface ActivityInstanceState {
-  selectedActivities: Activity[];
-  itineraryActivities: ItineraryActivity[];
+  scheduledActivities: Activity[];
+  otherOptions: ItineraryActivity[];
 }
 
+// itineraryActivites become scheduledActivities
+// these should also include the transit activites
+
+// selectedActivities become otherOptions
+
 const initialState: ActivityInstanceState = {
-  selectedActivities: [],
-  itineraryActivities: [],
+  scheduledActivities: [],
+  otherOptions: [],
 };
 
 //@ts-ignore
@@ -161,48 +146,18 @@ const activityInstanceReducer: Reducer<
   ActivityInstanceAction
 > = (state = initialState, action: ActivityInstanceAction) => {
   switch (action.type) {
-    case SET_ACTIVITY_INSTANCES:
-      return {
-        selectedActivities: action.selectedActivities,
-        itineraryActivities: action.itineraryActivities,
-      };
-    case SELECT_NEW_ACTIVITY:
+    case SET_SCHEDULED_ACTIVITIES: {
       return {
         ...state,
-        selectedActivities: [...state.selectedActivities, action.activity],
+        scheduledActivities: action.scheduledActivities,
       };
-    case DE_SELECT_ACTIVITY:
+    }
+    case SET_OTHER_OPTIONS: {
       return {
         ...state,
-        selectedActivities: state.selectedActivities.filter(
-          (activity: Activity) => {
-            if (action.activity && 'id' in action.activity) {
-              return activity.id !== action.activity.id;
-            }
-          }
-        ),
+        otherOptions: action.otherOptions,
       };
-    case SET_ITINERARY_ACTIVITIES:
-      return {
-        ...state,
-        itineraryActivities: action.itineraryActivities,
-      };
-    case ADD_ITINERARY_ACTIVITY:
-      return {
-        ...state,
-        itineraryActivities: [...state.itineraryActivities, action.activity],
-      };
-    case REMOVE_ITINERARY_ACTIVITY:
-      return {
-        ...state,
-        itineraryActivities: state.itineraryActivities.filter(
-          (activity: ItineraryActivity) => {
-            if (action.activity && 'details' in action.activity) {
-              return activity.details.id !== action.activity.details.id;
-            }
-          }
-        ),
-      };
+    }
     default:
       return state;
   }

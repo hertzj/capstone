@@ -15,6 +15,7 @@ import { ItemReorderEventDetail } from '@ionic/core';
 import { useDispatch, useSelector } from 'react-redux';
 //import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
+import { ItineraryActivity } from '../redux/activityInstances';
 const itinerary = [
   {
     id: 12,
@@ -46,27 +47,42 @@ function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
 }
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const Tab2: React.FC = itinerary => {
-  const activities = useSelector(
+  const scheduled = useSelector(
     //@ts-ignore
-    state => state.activityInstances.itineraryActivities
+    state => state.activityInstances.scheduledActivities
   );
-  console.log('activities on tab2: ', activities);
+  // @ts-ignore
+  const options = useSelector(state => state.activityInstances.otherOptions);
+  console.log('scheduled on tab2: ', scheduled);
+  console.log('options on tab2: ', options);
 
-  // these are the activities you want to map through; you can get the info from the details value on each activity object
+  // I think we want to display both the scheduled and the options?
+  // Or maybe just the scheduled for now
   // something like
 
-  // {
-  //   activities.map(activity => {
-  //     const { details } = activity; // alternatively could destructure in the argument
-  //     return (
-  //       <IonItem>
-  //         <IonImg src={details.WHATEVER}></IonImg>
-  //         <IonLabel>{details.locationORwhatever}</IonLabel>
-  //         <IonReorder slot="end" />
-  //       </IonItem>
-  //     );
-  //   });
-  // }
+  {
+    scheduled.map((activity: ItineraryActivity) => {
+      if (activity.types === 'transit') {
+        // or whatever we call it
+        // return some code to show the transit
+      }
+      // just a guess for what the below would be like. I'm sure you all have better ideas than I do
+      else if (activity.images) {
+        return (
+          <IonItem>
+            {activity.images.length ? (
+              <IonImg src={activity.images[0]}></IonImg>
+            ) : (
+              ''
+            )}
+            <IonLabel>
+              {activity.name} from {activity.startTime} to {activity.endTime}{' '}
+            </IonLabel>
+          </IonItem>
+        );
+      }
+    });
+  }
 
   return (
     <IonPage>
