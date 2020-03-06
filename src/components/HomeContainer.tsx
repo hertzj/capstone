@@ -44,7 +44,9 @@ const HomeContainer: React.FC = () => {
           </IonCard>
         </IonItem>
         <IonTitle>Add Itinerary</IonTitle>
-        <IonIcon icon={addCircleOutline} size="large" />
+        <IonButton href='/tab1'>
+        <IonIcon icon={addCircleOutline} color="secondary" size="large" />
+        </IonButton>
         <IonButton onClick={() => dispatch(signOutThunk())}>Sign Out</IonButton>
       </IonContent>
     </>

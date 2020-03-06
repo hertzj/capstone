@@ -56,10 +56,10 @@ const App: React.FC = () => (
             <IonIcon icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab1" href="/tab1">
+          {/* <IonTabButton tab="tab1" href="/tab1">
             <IonIcon icon={addCircleOutline} />
             <IonLabel>Create Itinerary</IonLabel>
-          </IonTabButton>
+          </IonTabButton> */}
           <IonTabButton tab="tab2" href="/tab2">
             <IonIcon icon={paperPlane} />
             <IonLabel>View Itinerary</IonLabel>
