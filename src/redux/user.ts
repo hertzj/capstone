@@ -5,6 +5,7 @@ import { ThunkAction } from 'redux-thunk';
 import { RootState, SotaState } from './index';
 import { Plugins } from '@capacitor/core';
 import axios from 'axios';
+import { Itinerary } from './planningItinerary';
 const { Storage } = Plugins;
 
 const storageKey = 'sota_token';
@@ -15,6 +16,7 @@ export interface User {
   lastName: string;
   city?: string;
   email: string;
+  itineraries?: Itinerary[];
 }
 
 interface UserAction {
@@ -28,6 +30,7 @@ const initialState: User = {
   lastName: '',
   city: '',
   email: '',
+  itineraries: []
 };
 
 export const setUser = (user: User): UserAction => {
