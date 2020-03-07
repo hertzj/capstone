@@ -53,10 +53,10 @@ const HomeContainer: React.FC = () => {
       </IonHeader>
       <IonContent>
         {makeListOfItineraryNames()}
+      </IonContent>
       <IonContent>
-
         <IonModal isOpen={showModal}>
-          <InputForm/>
+          <InputForm />
           <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
         </IonModal>
         <IonButton onClick={() => setShowModal(true)}>Add Itinerary</IonButton>
