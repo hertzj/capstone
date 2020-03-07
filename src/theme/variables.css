@@ -73,7 +73,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  --ion-background-color: rgba(232,184,140, 0.1);
+  --ion-background-color: ffffff;
   --ion-font-family: 'Helvetica'
 }
 @media (prefers-color-scheme: dark) {

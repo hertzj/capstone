@@ -14,6 +14,9 @@ import {
   IonButton,
   IonRouterLink,
   useIonViewWillEnter,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from '@ionic/react';
 import { signInThunk, initialLogInAttempt } from '../redux/user';
 import SignUpContainer from './SignUpContainer';
@@ -67,12 +70,20 @@ const SignInContainer: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
+          <IonGrid>
+            <IonRow class="ion-justify-content-center">
           <div className="signInButton">
+            <IonCol>
             <IonButton type="submit">Sign In</IonButton>
-            <IonRouterLink onClick={() => setHasAccount(false)}>
+            </IonCol>
+            <IonCol>
+                  <IonRouterLink class="ion-align-self-center	" onClick={() => setHasAccount(false)}>
               Don't have an account, sign up!
             </IonRouterLink>
-          </div>
+            </IonCol>
+            </div>
+            </IonRow>
+            </IonGrid>
         </IonList>
       </form>
     );

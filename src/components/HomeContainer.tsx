@@ -10,6 +10,9 @@ import {
   IonContent,
   IonButton,
   IonModal,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from '@ionic/react';
 import { addCircleOutline } from 'ionicons/icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -40,19 +43,25 @@ const HomeContainer: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonTitle>Current Itinerary</IonTitle>
-        <IonItem href="tab2" className="ion-activated">
           <IonCard>
             <IonTitle>
               {locationName ? `${locationName}` : 'No Location Yet'}
             </IonTitle>
           </IonCard>
-        </IonItem>
         <IonModal isOpen={showModal}>
           <InputForm/>
-          <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+          <IonButton color="secondary" onClick={() => setShowModal(false)}>Back</IonButton>
         </IonModal>
-        <IonButton onClick={() => setShowModal(true)}>Add Itinerary</IonButton>
-        <IonButton onClick={() => dispatch(signOutThunk())}>Sign Out</IonButton>
+        <IonGrid>
+          <IonRow className="ion-justify-content-evenly">
+            <IonCol class="ion-justify-content-center">
+            <IonButton onClick={() => setShowModal(true)}>Add Itinerary</IonButton>
+            </IonCol>
+            <IonCol class="ion-justify-content-center">
+           <IonButton color="secondary" onClick={() => dispatch(signOutThunk())}>Sign Out</IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </>
   );

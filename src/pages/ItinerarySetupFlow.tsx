@@ -159,7 +159,7 @@ const InputForm: React.FC = () => {
               />
             </IonItem>
             <IonItem>
-              <IonLabel>Arrival Time</IonLabel>
+              <IonLabel>Start Time</IonLabel>
               <IonDatetime
                 displayFormat="h:mm A"
                 onIonChange={(e: CustomEvent) => {
@@ -169,16 +169,7 @@ const InputForm: React.FC = () => {
               ></IonDatetime>
             </IonItem>
             <IonItem>
-            <Calendar
-              onChange={selectedDate => {
-                // @ts-ignore
-                setDate(selectedDate);
-              }}
-              value={date}
-            />
-            </IonItem>
-            <IonItem>
-              <IonLabel>Departure Time</IonLabel>
+              <IonLabel>End Time</IonLabel>
               <IonDatetime
                 displayFormat="h:mm A"
                 onIonChange={(e: CustomEvent) => {
@@ -190,7 +181,7 @@ const InputForm: React.FC = () => {
           </IonCardContent>
         </IonCard>
 
-        {/* <IonCard>
+        <IonCard>
           <IonCardTitle>Price Range</IonCardTitle>
           <IonSegment
             onIonChange={e => {
@@ -209,7 +200,7 @@ const InputForm: React.FC = () => {
               <IonLabel>$$$</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-        </IonCard> */}
+        </IonCard>
         <IonCard>
           <IonCardTitle>Categories</IonCardTitle>
           <IonList>
