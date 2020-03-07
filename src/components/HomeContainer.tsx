@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   IonCard,
   IonTitle,
@@ -8,14 +8,17 @@ import {
   IonHeader,
   IonToolbar,
   IonContent,
-  IonButton
+  IonButton,
+  IonModal,
 } from '@ionic/react';
 import { addCircleOutline } from 'ionicons/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { SotaState } from '../redux';
 import { signOutThunk } from '../redux/user';
+import InputForm from '../pages/ItinerarySetupFlow';
 
 const HomeContainer: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
   const firstName = useSelector((state: SotaState) => state.user.firstName);
   const lastName = useSelector((state: SotaState) => state.user.lastName);
   const itineraryList = useSelector(
@@ -42,6 +45,7 @@ const HomeContainer: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Welcome {`${firstName} ${lastName}`}!</IonTitle>
+
           <IonTitle>
             {itineraryList ? `Your Intineraries` : 'No Itineraries Yet'}
           </IonTitle>
@@ -49,8 +53,13 @@ const HomeContainer: React.FC = () => {
       </IonHeader>
       <IonContent>
         {makeListOfItineraryNames()}
-        <IonTitle>Add Itinerary</IonTitle>
-        <IonIcon icon={addCircleOutline} size="large" />
+      <IonContent>
+
+        <IonModal isOpen={showModal}>
+          <InputForm/>
+          <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+        </IonModal>
+        <IonButton onClick={() => setShowModal(true)}>Add Itinerary</IonButton>
         <IonButton onClick={() => dispatch(signOutThunk())}>Sign Out</IonButton>
       </IonContent>
     </>
