@@ -24,30 +24,40 @@ const HomeContainer: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const firstName = useSelector((state: SotaState) => state.user.firstName);
   const lastName = useSelector((state: SotaState) => state.user.lastName);
-  const itineraryName = useSelector(
-    (state: SotaState) => state.transitItinerary.name
+  const itineraryList = useSelector(
+    (state: SotaState) => state.user.itineraries
   );
-  const locationName = useSelector(
-    (state: SotaState) => state.transitItinerary.locationName
-  );
+
+  const makeListOfItineraryNames = () => {
+    if (itineraryList) {
+      return itineraryList.map(itineraryObj => {
+        return (
+          <IonItem className="ion-activated" key={itineraryObj.id}>
+            <IonCard>
+              <IonTitle>{itineraryObj.name}</IonTitle>
+            </IonCard>
+          </IonItem>
+        );
+      });
+    }
+  };
+
   const dispatch = useDispatch();
   return (
     <>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Welcome {`${firstName} ${lastName}`}!</IonTitle>
-          {/* <IonTitle>
-            {itineraryName ? `${itineraryName}` : 'No Itinerary Yet'}
-          </IonTitle> */}
+
+          <IonTitle>
+            {itineraryList ? `Your Intineraries` : 'No Itineraries Yet'}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonTitle>Current Itinerary</IonTitle>
-          <IonCard>
-            <IonTitle>
-              {locationName ? `${locationName}` : 'No Location Yet'}
-            </IonTitle>
-          </IonCard>
+        {makeListOfItineraryNames()}
+      <IonContent>
+
         <IonModal isOpen={showModal}>
           <InputForm/>
           <IonButton color="secondary" onClick={() => setShowModal(false)}>Back</IonButton>
