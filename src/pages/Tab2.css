@@ -1,21 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Catamaran&display=swap');
 
 *{
-  font-family: 'Catamaran'!important ;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 ion-content ion-toolbar {
   --background: translucent;
 }
-ion-reorder{
 
-}
 ion-img{
 width:25%;
 height:auto;
 border-radius: 50%
 }
+
 ion-item{
 border-style: none;
-font-family:'Satisfy' !important;
+font-family:'IBM Plex Sans', sans-serif;
+}
+
+ion-chip{
+  color:red !important;
+  background-color:rgba(42, 148, 146, 0.7);
 }

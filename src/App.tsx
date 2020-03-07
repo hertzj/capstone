@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, BrowserRouter } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
@@ -41,6 +41,7 @@ import { Plugins } from '@capacitor/core';
 console.log(Plugins);
 
 const App: React.FC = () => (
+  <BrowserRouter>
   <IonApp>
     <IonReactRouter>
       <IonTabs>
@@ -72,6 +73,7 @@ const App: React.FC = () => (
       </IonTabs>
     </IonReactRouter>
   </IonApp>
+  </BrowserRouter>
 );
 
 export default App;

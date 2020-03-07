@@ -63,6 +63,7 @@ const InputForm: React.FC = () => {
     const [showTags, setShowTags] = useState(form);
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
+    const [setShowModal] = useState(true);
     // consider moment here
     const [date, setDate] = useState(new Date());
 
@@ -88,7 +89,9 @@ const InputForm: React.FC = () => {
 
     return (
         <IonContent>
-            <form onSubmit={e => submit(e)}>
+            <form onSubmit={e => {
+                // setShowModal(false)
+                submit(e)}}>
                 <IonCard>
                     <IonItem>
                         <IonLabel position="floating" class="card_title">

@@ -10,12 +10,20 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCardContent,
+  IonChip,
 } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { useDispatch, useSelector } from 'react-redux';
 //import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
 import { ItineraryActivity } from '../redux/activityInstances';
+import { url } from 'inspector';
+import { withRouter } from 'react-router';
 const itinerary = [
   {
     id: 12,
@@ -73,8 +81,8 @@ const Tab2: React.FC = itinerary => {
             {activity.images.length ? (
               <IonImg src={activity.images[0]}></IonImg>
             ) : (
-              ''
-            )}
+                ''
+              )}
             <IonLabel>
               {activity.name} from {activity.startTime} to {activity.endTime}{' '}
             </IonLabel>
@@ -84,6 +92,7 @@ const Tab2: React.FC = itinerary => {
     });
   }
 
+  const newLocal = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/New_york_times_square-terabass.jpg/600px-New_york_times_square-terabass.jpg";
   return (
     <IonPage>
       <IonHeader>
@@ -92,36 +101,31 @@ const Tab2: React.FC = itinerary => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
-          {/* {
-            itinerary.map(location => {
-              return (<IonItem>
-                <IonImg src={location.imgUrl}></IonImg>
-                <IonLabel>{location.location}</IonLabel>
-                <IonReorder slot="end" />
-              </IonItem>);
-            }
-            )
-          } */}
-          <IonItem>
-            <IonLabel color="primary">Times Square</IonLabel>
-            <br />
-            <IonLabel color="secondary">Start Time</IonLabel>
-            <br />
-            <IonLabel color="secondary">End Time</IonLabel>
-            <br />
-
-            <IonImg src="https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg" />
-            <IonReorder slot="end" />
-          </IonItem>
-          <IonItem>
-            <IonLabel color="primary">Central Park</IonLabel>
-            <IonLabel color="secondary">Start Time</IonLabel>
-            <IonLabel color="secondary">End Time</IonLabel>
-            <IonImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Central_Park_-_The_Pond_%2848377220157%29.jpg/1200px-Central_Park_-_The_Pond_%2848377220157%29.jpg" />
-            <IonReorder slot="end" />
-          </IonItem>
-        </IonReorderGroup>
+        <IonCard style={{
+          backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/New_york_times_square-terabass.jpg/600px-New_york_times_square-terabass.jpg)`,
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover', 
+          fontSize: 22,
+          height: "200px",
+        }}>
+          <IonCardContent style={{
+            height: '100%',
+            width: '100%',
+            backgroundColor: 'rgba(0,0,0, 0.3)',
+          }}>
+            <IonCardSubtitle style={{
+              color: '#ffffff',
+            }}>Location</IonCardSubtitle>
+            <IonCardTitle style={{
+              color: '#ffffff',
+            }}>Times Square</IonCardTitle>
+            <IonChip>
+              <IonLabel color="light">SightSeeing</IonLabel>
+            </IonChip>
+        </IonCardContent>
+        </IonCard>
+         
       </IonContent>
     </IonPage>
   );

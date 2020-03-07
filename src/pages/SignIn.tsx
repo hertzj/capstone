@@ -71,8 +71,8 @@ const SignInForm: React.FC = () => {
                 }}
               ></IonInput>
             </IonItem>
-            <div className="signInButton">
-              <IonButton type="submit">Sign In</IonButton>
+            <div className="signInButton ion-align-items-center">
+              <IonButton type="submit" >Sign In</IonButton>
               <IonRouterLink href="/signUp">
                 Don't have an account, sign up!
               </IonRouterLink>

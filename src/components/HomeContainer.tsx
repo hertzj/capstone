@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   IonCard,
   IonTitle,
@@ -9,13 +9,16 @@ import {
   IonToolbar,
   IonContent,
   IonButton,
+  IonModal,
 } from '@ionic/react';
 import { addCircleOutline } from 'ionicons/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { SotaState } from '../redux';
 import { signOutThunk } from '../redux/user';
+import InputForm from '../pages/ItinerarySetupFlow';
 
 const HomeContainer: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
   const firstName = useSelector((state: SotaState) => state.user.firstName);
   const lastName = useSelector((state: SotaState) => state.user.lastName);
   const itineraryName = useSelector(
@@ -30,12 +33,13 @@ const HomeContainer: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Welcome {`${firstName} ${lastName}`}!</IonTitle>
-          <IonTitle>
+          {/* <IonTitle>
             {itineraryName ? `${itineraryName}` : 'No Itinerary Yet'}
-          </IonTitle>
+          </IonTitle> */}
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonTitle>Current Itinerary</IonTitle>
         <IonItem href="tab2" className="ion-activated">
           <IonCard>
             <IonTitle>
@@ -43,10 +47,11 @@ const HomeContainer: React.FC = () => {
             </IonTitle>
           </IonCard>
         </IonItem>
-        <IonTitle>Add Itinerary</IonTitle>
-        <IonButton href='/tab1'>
-        <IonIcon icon={addCircleOutline} color="secondary" size="large" />
-        </IonButton>
+        <IonModal isOpen={showModal}>
+          <InputForm/>
+          <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+        </IonModal>
+        <IonButton onClick={() => setShowModal(true)}>Add Itinerary</IonButton>
         <IonButton onClick={() => dispatch(signOutThunk())}>Sign Out</IonButton>
       </IonContent>
     </>
