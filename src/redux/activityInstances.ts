@@ -27,6 +27,7 @@ export interface ItineraryActivity {
   duration: number;
   walk?: boolean;
   itineraryId?: string;
+  travel_time_minutes?: number;
 }
 
 // export const selectActivity = (activity: Activity): ActivityInstanceAction => {
