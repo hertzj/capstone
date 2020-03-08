@@ -45,15 +45,18 @@ const Tab2: React.FC = itinerary => {
   const makeListOfActivities = () => {
     if (scheduled) {
       return scheduled.map((singleActivity: { images: any; name: any; types: any; startTime: any; endTime:any }) => {
+        const backgroundImageUrl = singleActivity.images.length ? `url(${singleActivity.images[0]})` : `url(https://cdn.vox-cdn.com/thumbor/YQVObtsv5vFSxMWPZOxyzPnT3ZE=/0x0:2000x1333/1200x900/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/58405263/171109_08_17_25_5DSR4719.0.jpg)`
         return (
-          <IonCard style={{
-            backgroundImage: `url(${singleActivity.images[0]})`,
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            fontSize: 22,
-            height: "300px",
-          }}>
+      
+           <IonCard style={{
+            backgroundImage: {backgroundImageUrl},
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              fontSize: 22,
+              height: "300px",
+            }}> 
+       
             <IonCardContent style={{
               height: '100%',
               width: '100%',
