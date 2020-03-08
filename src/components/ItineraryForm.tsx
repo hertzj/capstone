@@ -16,13 +16,9 @@ import {
     IonLabel,
     IonSelect,
     IonSelectOption,
-    IonChip,
-    IonAvatar,
-    IonIcon,
     IonList,
     IonCheckbox,
     IonInput,
-    IonTitle,
     IonDatetime,
     IonButton,
 } from '@ionic/react';

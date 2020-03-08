@@ -24,6 +24,7 @@ import './Tab2.css';
 import { ItineraryActivity } from '../redux/activityInstances';
 import { url } from 'inspector';
 import { withRouter } from 'react-router';
+import { types } from 'util';
 
 
 
@@ -43,15 +44,15 @@ const Tab2: React.FC = itinerary => {
 
   const makeListOfActivities = () => {
     if (scheduled) {
-      return scheduled.map((singleActivity: { imgUrl: any; location: React.ReactNode; types: React.ReactNode; }) => {
+      return scheduled.map((singleActivity: { images: any; name: any; types: any; startTime: any; endTime:any }) => {
         return (
           <IonCard style={{
-            backgroundImage: `url(${singleActivity.imgUrl[0]})`,
+            backgroundImage: `url(${singleActivity.images[0]})`,
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             fontSize: 22,
-            height: "200px",
+            height: "300px",
           }}>
             <IonCardContent style={{
               height: '100%',
@@ -60,10 +61,25 @@ const Tab2: React.FC = itinerary => {
             }}>
               <IonCardTitle style={{
                 color: '#ffffff',
-              }}>{singleActivity.location}</IonCardTitle>
+              }}>{singleActivity.name}</IonCardTitle>
               <IonChip>
-                <IonLabel color="light">{singleActivity.types}</IonLabel>
+               { singleActivity.types ? 
+            (<IonLabel color="light">{singleActivity.types[0]}</IonLabel>)
+                  : (<IonLabel color="light">Activity</IonLabel>)
+          }
               </IonChip>
+              <IonCardSubtitle style={{
+                color: 'primary', paddingTop: "5px"
+              }}>Start Time</IonCardSubtitle>
+              <IonCardTitle style={{
+                color: '#ffffff', fontSize:"14px",
+              }}>{singleActivity.startTime}</IonCardTitle>
+              <IonCardSubtitle style={{
+                color: 'primary', paddingTop: "5px"
+              }}>End Time</IonCardSubtitle>
+              <IonCardTitle style={{
+                color: '#ffffff', fontSize: "14px"
+              }}>{singleActivity.endTime}</IonCardTitle>
             </IonCardContent>
           </IonCard>
         );
@@ -102,7 +118,7 @@ const Tab2: React.FC = itinerary => {
           <IonTitle>Current Itinerary</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent scrollEvents={true}>
         {makeListOfActivities()}
       </IonContent>
     </IonPage>

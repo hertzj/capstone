@@ -91,6 +91,9 @@ const InputForm: React.FC = () => {
       <form onSubmit={e => submit(e)}>
         <IonCard>
           <IonItem>
+            <IonCardHeader>
+            <IonCardTitle>Itinerary Name</IonCardTitle>
+            </IonCardHeader>
             <IonLabel position="floating" class="card_title">
               Itinerary Name
             </IonLabel>
@@ -128,6 +131,10 @@ const InputForm: React.FC = () => {
           </IonCardHeader>
         </IonCard>
         <IonCard>
+          <IonCardHeader>
+          <IonCardTitle>Location</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
           <IonLabel position="floating">Starting Location</IonLabel>
           <IonInput
             required
@@ -143,6 +150,7 @@ const InputForm: React.FC = () => {
               if (e.detail) setEndLocation(e.detail.value);
             }}
           ></IonInput>
+          </IonCardContent>
         </IonCard>
         <IonCard>
           <IonCardHeader>
@@ -181,8 +189,11 @@ const InputForm: React.FC = () => {
           </IonCardContent>
         </IonCard>
 
-        <IonCard>
-          <IonCardTitle>Price Range</IonCardTitle>
+        <IonCard>   
+          <IonCardHeader>
+          <IonCardTitle>Price Range</IonCardTitle>       
+          </IonCardHeader>
+          <IonCardContent>
           <IonSegment
             onIonChange={e => {
               if (typeof e.detail.value === 'string') {
@@ -200,9 +211,13 @@ const InputForm: React.FC = () => {
               <IonLabel>$$$</IonLabel>
             </IonSegmentButton>
           </IonSegment>
+          </IonCardContent>
         </IonCard>
         <IonCard>
+          <IonCardHeader>
           <IonCardTitle>Categories</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
           <IonList>
             {showTags.map(({ val, text, isChecked }) => (
               <IonItem key={val}>
@@ -240,6 +255,7 @@ const InputForm: React.FC = () => {
               </IonItem>
             ))}
           </IonList>
+          </IonCardContent>
         </IonCard>
         <IonButton type="submit" expand="block">
           Create Itinerary

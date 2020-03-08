@@ -15,6 +15,11 @@ import {
   IonCol,
   IonList,
   IonCardSubtitle,
+  IonInfiniteScroll,
+  IonVirtualScroll,
+  IonCardHeader,
+  IonCardTitle,
+  IonText,
 } from '@ionic/react';
 import { addCircleOutline } from 'ionicons/icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -34,11 +39,12 @@ const HomeContainer: React.FC = () => {
     if (itineraryList) {
       return itineraryList.map(itineraryObj => {
         return (
-          <IonCard style={{
-            height: "20px", backgroundColor:"rgba(224,108,78,0.1)"}} key={itineraryObj.id}>
-              <IonTitle>{itineraryObj.name}</IonTitle>
-            <IonCardSubtitle>{itineraryObj.date}</IonCardSubtitle>
-            </IonCard>
+          <IonCard key={itineraryObj.id}>
+            <IonCardHeader>
+              <IonCardSubtitle>Itinerary Name</IonCardSubtitle>
+              <IonCardTitle>{itineraryObj.name}</IonCardTitle>
+            </IonCardHeader>
+          </IonCard>
         );
       });
     }
@@ -47,15 +53,22 @@ const HomeContainer: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <>
+
       <IonHeader>
         <IonToolbar>
           <IonTitle>Welcome {`${firstName} ${lastName}`}!</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonList>
-        {makeListOfItineraryNames()}
-      </IonList>
-      <IonContent>
+      <IonContent scrollEvents={true}>
+        <IonItem>
+        <IonText color="primary">
+          <h1>Itineraries</h1>
+        </IonText>
+        </IonItem>
+        <IonButton href="/tab1">Add</IonButton>
+        <IonList>
+          {makeListOfItineraryNames()}
+        </IonList>
         <IonModal isOpen={showModal}>
           <InputForm />
           <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
@@ -63,14 +76,15 @@ const HomeContainer: React.FC = () => {
         <IonGrid>
           <IonRow className="ion-justify-content-evenly">
             <IonCol class="ion-justify-content-center">
-            <IonButton onClick={() => setShowModal(true)}>Add Itinerary</IonButton>
+              <IonButton expand="block"  onClick={() => setShowModal(true)}>Add Itinerary</IonButton>
             </IonCol>
             <IonCol class="ion-justify-content-center">
-           <IonButton color="secondary" onClick={() => dispatch(signOutThunk())}>Sign Out</IonButton>
+              <IonButton color="primary" fill="outline" expand="block" onClick={() => dispatch(signOutThunk())}>Sign Out</IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
-      </IonContent>
+      </IonContent >
+   
     </>
   );
 };
