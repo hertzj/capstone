@@ -13,7 +13,7 @@ import { ThunkAction } from 'redux-thunk';
 import { RootState } from './index';
 //@ts-ignore
 import Geocode from 'react-geocode';
-import { googleAPIKey } from '../secrets';
+import { googleAPIKey, cityMapperAPIKey } from '../secrets';
 import axios from 'axios';
 
 export interface ItineraryAction {
@@ -140,27 +140,77 @@ export const createNewItinerary = (
       )
     ).data;
 
-    // commenting out old way, just to remember pattern for now
-    // const { newItinerary, activityInstances } = newTransitData;
-    // dispatch(newItineraryActionCreator(newItinerary));
+    let { newItinerary, scheduledActivities, otherOptions } = newTransitData;
+    const actsToSend: any[] = [];
 
-    // const arrayToMapFrom = new Array(activityInstances.length).fill('');
+    const { date, startLocationLat, startLocationLong } = newItinerary;
 
-    // const instancesToDispatch = arrayToMapFrom.map((el, idx) => {
-    //   return {
-    //     type: TYPE_ACTIVITY,
-    //     details: activityInstances[idx],
-    //   };
-    // });
+    const { locationLat, locationLong } = scheduledActivities[0];
 
-    // dispatch(setItineraryActivities(instancesToDispatch));
+    const firstMove = {
+      date,
+      startLocationLat,
+      startLocationLong,
+      endLocationLat: locationLat,
+      endLocationLong: locationLong,
+      endTime: scheduledActivities[0].startTime,
+    };
 
-    // WILL NOT WORK YET
-    // might need to massage the data
-    const { newItinerary, scheduledActivities, otherOptions } = newTransitData;
-    dispatch(newItineraryActionCreator(newItinerary));
-    dispatch(setScheduledActivities(scheduledActivities));
-    dispatch(setOtherOptions(otherOptions));
+    axios
+      .post('https://sota-server.herokuapp.com/api/citymapper', firstMove)
+      .then(res => {
+        const firstTransit = res.data;
+        firstTransit.types = 'transit';
+        console.log('first transit: ', firstTransit);
+        actsToSend.push(firstTransit);
+      })
+      .then(() => {
+        return scheduledActivities.forEach(
+          async (activity: ItineraryActivity, idx: number) => {
+            const { locationLat, locationLong, endTime } = activity;
+            const startLocationLat = locationLat;
+            const startLocationLong = locationLong;
+            let endLocationLat;
+            let endLocationLong;
+            if (idx < scheduledActivities.length - 1) {
+              endLocationLat = scheduledActivities[idx + 1].locationLat;
+              endLocationLong = scheduledActivities[idx + 1].locationLong;
+            } else {
+              endLocationLat = newItinerary.endLocationLat;
+              endLocationLong = newItinerary.endLocationLong;
+            }
+
+            await axios
+              .post('https://sota-server.herokuapp.com/api/citymapper', {
+                date,
+                startLocationLat,
+                startLocationLong,
+                endLocationLat,
+                endLocationLong,
+                endTime,
+              })
+              .then(res => {
+                const transit = res.data;
+                transit.types = 'transit';
+                console.log('transit within for each: ', transit);
+                actsToSend.push(activity);
+                actsToSend.push(transit);
+              })
+              .then(() => {
+                if (idx === scheduledActivities.length - 1) {
+                  dispatch(newItineraryActionCreator(newItinerary));
+                  dispatch(setScheduledActivities(actsToSend));
+                  dispatch(setOtherOptions(otherOptions));
+                }
+              });
+            console.log('at end of for each');
+          }
+        );
+      })
+      .catch(e => {
+        console.log('error in promise chain');
+        console.error(e);
+      });
   };
 };
 
