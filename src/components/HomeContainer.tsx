@@ -13,6 +13,8 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonList,
+  IonCardSubtitle,
 } from '@ionic/react';
 import { addCircleOutline } from 'ionicons/icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,11 +34,11 @@ const HomeContainer: React.FC = () => {
     if (itineraryList) {
       return itineraryList.map(itineraryObj => {
         return (
-          <IonItem className="ion-activated" key={itineraryObj.id}>
-            <IonCard>
+          <IonCard style={{
+            height: "20px", backgroundColor:"rgba(224,108,78,0.1)"}} key={itineraryObj.id}>
               <IonTitle>{itineraryObj.name}</IonTitle>
+            <IonCardSubtitle>{itineraryObj.date}</IonCardSubtitle>
             </IonCard>
-          </IonItem>
         );
       });
     }
@@ -48,19 +50,15 @@ const HomeContainer: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Welcome {`${firstName} ${lastName}`}!</IonTitle>
-
-          <IonTitle>
-            {itineraryList ? `Your Intineraries` : 'No Itineraries Yet'}
-          </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonList>
         {makeListOfItineraryNames()}
+      </IonList>
       <IonContent>
-
         <IonModal isOpen={showModal}>
-          <InputForm/>
-          <IonButton color="secondary" onClick={() => setShowModal(false)}>Back</IonButton>
+          <InputForm />
+          <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
         </IonModal>
         <IonGrid>
           <IonRow className="ion-justify-content-evenly">
