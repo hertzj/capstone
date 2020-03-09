@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Catamaran&display=swap');
 
 *{
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif !important;
 }
 
 ion-content ion-toolbar {

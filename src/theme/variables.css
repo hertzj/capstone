@@ -8,6 +8,7 @@ http://ionicframework.com/docs/theming/ */
 }
 :root {
     --ion-font-family: 'IBM Plex Sans' !important;
+   font-size: 1.3rem;
     display: flex;
 
   --ion-color-primary: #318887;
@@ -73,7 +74,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  --ion-background-color: ffffff;
+  --ion-background-color: #ffffff;
   --ion-font-family: 'Helvetica'
 }
 @media (prefers-color-scheme: dark) {
