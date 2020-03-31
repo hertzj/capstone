@@ -5,6 +5,7 @@ import { Reducer, Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from './index';
 import { Activity } from './activites';
+import axios from 'axios';
 
 interface ActivityInstanceAction {
   type: symbol;
@@ -28,41 +29,8 @@ export interface ItineraryActivity {
   walk?: boolean;
   itineraryId?: string;
   travel_time_minutes?: number;
+  order?: number;
 }
-
-// export const selectActivity = (activity: Activity): ActivityInstanceAction => {
-//   return {
-//     type: SELECT_NEW_ACTIVITY,
-//     activity,
-//   };
-// };
-
-// export const deSelectActivity = (
-//   activity: Activity
-// ): ActivityInstanceAction => {
-//   return {
-//     type: DE_SELECT_ACTIVITY,
-//     activity,
-//   };
-// };
-
-// export const newItineraryActivity = (
-//   activity: ItineraryActivity
-// ): ActivityInstanceAction => {
-//   return {
-//     type: ADD_ITINERARY_ACTIVITY,
-//     activity,
-//   };
-// };
-
-// export const removeItineraryActivity = (
-//   activity: ItineraryActivity
-// ): ActivityInstanceAction => {
-//   return {
-//     type: REMOVE_ITINERARY_ACTIVITY,
-//     activity,
-//   };
-// };
 
 export const setScheduledActivities = (
   scheduledActivities: ItineraryActivity[]
@@ -82,59 +50,50 @@ export const setOtherOptions = (
   };
 };
 
-// will need to think more about this one
-// requires our algo
-// this thunk  will take the selected activities and transform them into user activities by running the algo over them
-// const transformActivityToItineraryActivity = (
-//   activities: Activity[],
-//   date: Date
-// ): ThunkAction<void, RootState, unknown, Action> => {
-//   return async (dispatch, getState) => {
-//     // 1) sort activities based on location
-//     // 2) then create ItineraryActivities
-//     const itineraryActivities = activities.map((activity: Activity) => {
-//       // could make the UUID for the id here as well with the UUID NPM library
+export const putAndSetScheduledActs = (
+  scheduled: Activity[]
+): ThunkAction<void, RootState, unknown, Action> => {
+  return async dispatch => {
+    scheduled.forEach((act: Activity, idx: number) => {
+      act.order = idx + 1;
+    });
+    const newScheduled = (
+      await axios.put(
+        'http://sota-server.herokuapp.com/api/activityInstances',
+        scheduled
+      )
+    ).data;
+    console.log('new scheduled: ', newScheduled);
+    dispatch(setScheduledActivities(newScheduled));
+  };
+};
 
-//       // const itineraryDetails: Details = {
-//       //   id: uuidv4(),
-//       //   startTime: '',
-//       //   endTime: '',
-//       //   date,
-//       //   // plannedDuration: activity.duration,
-//       //   actualDuration: 0,
-//       //   rating: null,
-//       //   //@ts-ignore
-//       //   itineraryId: getState().planningItinerary.id,
-//       // };
-//       const itineraryActivity: ItineraryActivity = {
-//         type: 'travel',
-//         details: itineraryDetails,
-//       };
-//       return itineraryActivity;
-//     });
+export const setOldActsToScheduled = (
+  id: string
+): ThunkAction<void, RootState, unknown, Action> => {
+  return async dispatch => {
+    const oldActsToSee = (
+      await axios.get(
+        `http://sota-server.herokuapp.com/api/activityInstances/${id}`
+      )
+    ).data;
 
-//     // 3) set start and end times (could also do while mapping)
-//     // probably want a for each or some type of helper function to set the start and end times
+    console.log('old acts to see before sort: ', oldActsToSee);
 
-//     // 4) post each activity through a for each
-//     itineraryActivities.forEach((activity: ItineraryActivity) => {
-//       // could also make the UUID here in sequelize
-//       // (await /* something something */)
-//     });
-
-//     dispatch(setItineraryActivities(itineraryActivities));
-//   };
-// };
+    oldActsToSee.sort((a: ItineraryActivity, b: ItineraryActivity) => {
+      // @ts-ignore
+      if (a.order > b.order) return 1;
+      return -1;
+    });
+    console.log('old acts to see after sort: ', oldActsToSee);
+    dispatch(setScheduledActivities(oldActsToSee));
+  };
+};
 
 export interface ActivityInstanceState {
   scheduledActivities: Activity[];
   otherOptions: ItineraryActivity[];
 }
-
-// itineraryActivites become scheduledActivities
-// these should also include the transit activites
-
-// selectedActivities become otherOptions
 
 const initialState: ActivityInstanceState = {
   scheduledActivities: [],
