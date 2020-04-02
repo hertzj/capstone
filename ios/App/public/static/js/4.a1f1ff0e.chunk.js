@@ -1,2 +1,0 @@
-(this.webpackJsonpCapstoneTravelApp=this.webpackJsonpCapstoneTravelApp||[]).push([[4],{175:function(n,t,e){"use strict";e.r(t),e.d(t,"startStatusTap",(function(){return i}));var o=e(31),i=(e(10),function(){var n=window;n.addEventListener("statusTap",(function(){Object(o.g)((function(){var t=n.innerWidth,e=n.innerHeight,i=document.elementFromPoint(t/2,e/2);if(i){var r=i.closest("ion-content");r&&r.componentOnReady().then((function(){Object(o.l)((function(){return r.scrollToTop(300)}))}))}}))}))})}}]);
-//# sourceMappingURL=4.a1f1ff0e.chunk.js.map
