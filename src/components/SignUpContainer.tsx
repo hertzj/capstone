@@ -39,7 +39,7 @@ const SignUpContainer: React.FC = () => {
           setCity(e.detail.value);
           break;
         case 'email':
-          setCity(e.detail.value);
+          setEmail(e.detail.value);
           break;
         case 'password':
           setPassword(e.detail.value);
