@@ -150,82 +150,76 @@ export const createNewItinerary = (
       scheduledActivities
     );
 
-    dispatch(newItineraryActionCreator(newItinerary));
-    dispatch(putAndSetScheduledActs(scheduledActivities));
-    dispatch(setOtherOptions(otherOptions));
+    const { date, startLocationLat, startLocationLong } = newItinerary;
 
-    // the below is commented out so I (JH) could test without running into city mapper issues
-    // will try again with it once city mapper unblocks us
+    const { locationLat, locationLong } = scheduledActivities[0];
 
-    // const { date, startLocationLat, startLocationLong } = newItinerary;
+    const firstMove = {
+      date,
+      startLocationLat,
+      startLocationLong,
+      endLocationLat: locationLat,
+      endLocationLong: locationLong,
+      endTime: scheduledActivities[0].startTime,
+      itineraryId: newItinerary.id,
+    };
 
-    // const { locationLat, locationLong } = scheduledActivities[0];
+    axios
+      .post('https://sota-server.herokuapp.com/api/citymapper', firstMove)
+      .then(res => {
+        const firstTransit = res.data;
+        firstTransit.types = ['transit'];
+        console.log('first transit: ', firstTransit);
+        actsToSend.push(firstTransit);
+      })
+      .then(() => {
+        return scheduledActivities.forEach(
+          async (activity: ItineraryActivity, idx: number) => {
+            const { locationLat, locationLong, endTime } = activity;
+            const startLocationLat = locationLat;
+            const startLocationLong = locationLong;
+            let endLocationLat;
+            let endLocationLong;
+            if (idx < scheduledActivities.length - 1) {
+              endLocationLat = scheduledActivities[idx + 1].locationLat;
+              endLocationLong = scheduledActivities[idx + 1].locationLong;
+            } else {
+              endLocationLat = newItinerary.endLocationLat;
+              endLocationLong = newItinerary.endLocationLong;
+            }
 
-    // const firstMove = {
-    //   date,
-    //   startLocationLat,
-    //   startLocationLong,
-    //   endLocationLat: locationLat,
-    //   endLocationLong: locationLong,
-    //   endTime: scheduledActivities[0].startTime,
-    // };
-
-    // axios
-    //   .post('https://sota-server.herokuapp.com/api/citymapper', firstMove)
-    //   .then(res => {
-    //     const firstTransit = res.data;
-    //     firstTransit.types = 'transit';
-    //     console.log('first transit: ', firstTransit);
-    //     actsToSend.push(firstTransit);
-    //   })
-    //   .then(() => {
-    //     return scheduledActivities.forEach(
-    //       async (activity: ItineraryActivity, idx: number) => {
-    //         const { locationLat, locationLong, endTime } = activity;
-    //         const startLocationLat = locationLat;
-    //         const startLocationLong = locationLong;
-    //         let endLocationLat;
-    //         let endLocationLong;
-    //         if (idx < scheduledActivities.length - 1) {
-    //           endLocationLat = scheduledActivities[idx + 1].locationLat;
-    //           endLocationLong = scheduledActivities[idx + 1].locationLong;
-    //         } else {
-    //           endLocationLat = newItinerary.endLocationLat;
-    //           endLocationLong = newItinerary.endLocationLong;
-    //         }
-
-    //         await axios
-    //           .post('https://sota-server.herokuapp.com/api/citymapper', {
-    //             date,
-    //             startLocationLat,
-    //             startLocationLong,
-    //             endLocationLat,
-    //             endLocationLong,
-    //             endTime,
-    //           })
-    //           .then(res => {
-    //             const transit = res.data;
-    //             transit.types = 'transit';
-    //             console.log('transit within for each: ', transit);
-    //             actsToSend.push(activity);
-    //             actsToSend.push(transit);
-    //           })
-    //           .then(() => {
-    //             if (idx === scheduledActivities.length - 1) {
-    //               dispatch(newItineraryActionCreator(newItinerary));
-    //               // dispatch(setScheduledActivities(actsToSend));
-    //               dispatch(putAndSetScheduledActs(actsToSend));
-    //               dispatch(setOtherOptions(otherOptions));
-    //             }
-    //           });
-    //         console.log('at end of for each');
-    //       }
-    //     );
-    //   })
-    //   .catch(e => {
-    //     console.log('error in promise chain');
-    //     console.error(e);
-    //   });
+            await axios
+              .post('https://sota-server.herokuapp.com/api/citymapper', {
+                date,
+                startLocationLat,
+                startLocationLong,
+                endLocationLat,
+                endLocationLong,
+                endTime,
+                itineraryId: newItinerary.id,
+              })
+              .then(res => {
+                const transit = res.data;
+                transit.types = ['transit'];
+                console.log('transit within for each: ', transit);
+                actsToSend.push(activity);
+                actsToSend.push(transit);
+              })
+              .then(() => {
+                if (idx === scheduledActivities.length - 1) {
+                  dispatch(newItineraryActionCreator(newItinerary));
+                  dispatch(putAndSetScheduledActs(actsToSend));
+                  dispatch(setOtherOptions(otherOptions));
+                }
+              });
+            console.log('at end of for each');
+          }
+        );
+      })
+      .catch(e => {
+        console.log('error in promise chain');
+        console.error(e);
+      });
   };
 };
 
