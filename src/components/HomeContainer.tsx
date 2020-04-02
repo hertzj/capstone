@@ -65,13 +65,12 @@ const HomeContainer: React.FC = () => {
           <h1>Itineraries</h1>
         </IonText>
         </IonItem>
-        <IonButton href="/tab1">Add</IonButton>
         <IonList>
           {makeListOfItineraryNames()}
         </IonList>
         <IonModal isOpen={showModal}>
           <InputForm />
-          <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+          <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
         </IonModal>
         <IonGrid>
           <IonRow className="ion-justify-content-evenly">
