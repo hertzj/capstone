@@ -21,7 +21,7 @@ export interface SotaState {
   user: User;
   activityInstaces: ActivityInstanceState;
   transitItinerary: Itinerary;
-  planningIterinary: Itinerary;
+  planningItinerary: Itinerary;
   activities: Activity;
 }
 export type RootState = ReturnType<typeof appReducer>;
