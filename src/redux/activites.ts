@@ -12,6 +12,8 @@ export interface Activity {
   duration: number;
   rating: number;
   url: string; // think we will maybe want this or a description or something
+  itineraryId?: string;
+  order?: number;
 }
 
 interface ActivityAction {
