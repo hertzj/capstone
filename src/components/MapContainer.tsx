@@ -10,8 +10,8 @@ import { Geolocation } from '@capacitor/core';
 
 // someone else should make this not look awful!
 const mapContainerStyle = {
-  height: '80%',
-  width: '80%',
+  height: '100%',
+  width: '100%',
 };
 
 interface Position {

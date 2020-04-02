@@ -7,6 +7,8 @@ import {
   ItineraryActivity,
   setScheduledActivities,
   setOtherOptions,
+  putAndSetScheduledActs,
+  setOldActsToScheduled,
 } from './activityInstances';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
@@ -143,6 +145,11 @@ export const createNewItinerary = (
     let { newItinerary, scheduledActivities, otherOptions } = newTransitData;
     const actsToSend: any[] = [];
 
+    console.log(
+      'scheduled activities we get back from posting to itineraries/newActivities: ',
+      scheduledActivities
+    );
+
     const { date, startLocationLat, startLocationLong } = newItinerary;
 
     const { locationLat, locationLong } = scheduledActivities[0];
@@ -154,13 +161,14 @@ export const createNewItinerary = (
       endLocationLat: locationLat,
       endLocationLong: locationLong,
       endTime: scheduledActivities[0].startTime,
+      itineraryId: newItinerary.id,
     };
 
     axios
       .post('https://sota-server.herokuapp.com/api/citymapper', firstMove)
       .then(res => {
         const firstTransit = res.data;
-        firstTransit.types = 'transit';
+        firstTransit.types = ['transit'];
         console.log('first transit: ', firstTransit);
         actsToSend.push(firstTransit);
       })
@@ -188,10 +196,11 @@ export const createNewItinerary = (
                 endLocationLat,
                 endLocationLong,
                 endTime,
+                itineraryId: newItinerary.id,
               })
               .then(res => {
                 const transit = res.data;
-                transit.types = 'transit';
+                transit.types = ['transit'];
                 console.log('transit within for each: ', transit);
                 actsToSend.push(activity);
                 actsToSend.push(transit);
@@ -199,7 +208,7 @@ export const createNewItinerary = (
               .then(() => {
                 if (idx === scheduledActivities.length - 1) {
                   dispatch(newItineraryActionCreator(newItinerary));
-                  dispatch(setScheduledActivities(actsToSend));
+                  dispatch(putAndSetScheduledActs(actsToSend));
                   dispatch(setOtherOptions(otherOptions));
                 }
               });
@@ -211,6 +220,19 @@ export const createNewItinerary = (
         console.log('error in promise chain');
         console.error(e);
       });
+  };
+};
+
+export const getItinerary = (
+  id: string
+): ThunkAction<void, RootState, unknown, Action> => {
+  return async dispatch => {
+    const newItinerary = (
+      await axios.get(`http://sota-server.herokuapp.com/api/itineraries/${id}`)
+    ).data;
+    console.log('newItinerary: ', newItinerary);
+    dispatch(newItineraryActionCreator(newItinerary));
+    dispatch(setOldActsToScheduled(id));
   };
 };
 
