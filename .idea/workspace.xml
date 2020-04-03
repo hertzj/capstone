@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="88eb0f8c-271f-44b7-a964-d18d440ffbe5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ios/App/public/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/App/public/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ios/App/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/precache-manifest.f96959566cc70d586c818eca6476a369.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/ios/App/public/service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/css/9.d03843cf.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/css/9.d03843cf.chunk.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/css/main.0ed8c4b3.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/css/main.0ed8c4b3.chunk.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/js/9.a1a96dcc.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/js/9.a1a96dcc.chunk.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/js/9.a1a96dcc.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/js/main.dbd51461.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/App/public/static/js/main.dbd51461.chunk.js.map" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1a0Qv0ub4bqberbvN3sUlrfXZgN" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="88eb0f8c-271f-44b7-a964-d18d440ffbe5" name="Default Changelist" comment="" />
+      <created>1585870257692</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585870257692</updated>
+    </task>
+    <servers />
+  </component>
+</project>
