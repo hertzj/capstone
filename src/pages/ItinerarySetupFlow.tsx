@@ -92,7 +92,7 @@ const InputForm: React.FC = () => {
         <IonCard>
           <IonItem>
             <IonCardHeader>
-            <IonCardTitle>Itinerary Name</IonCardTitle>
+              <IonCardTitle>Itinerary Name</IonCardTitle>
             </IonCardHeader>
             <IonLabel position="floating" class="card_title">
               Itinerary Name
@@ -132,24 +132,24 @@ const InputForm: React.FC = () => {
         </IonCard>
         <IonCard>
           <IonCardHeader>
-          <IonCardTitle>Location</IonCardTitle>
+            <IonCardTitle>Location</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-          <IonLabel position="floating">Starting Location</IonLabel>
-          <IonInput
-            required
-            type="text"
-            onIonChange={(e: CustomEvent) => {
-              if (e.detail) setStartLocation(e.detail.value);
-            }}
-          ></IonInput>
-          <IonLabel position="floating">End Location</IonLabel>
-          <IonInput
-            type="text"
-            onIonChange={(e: CustomEvent) => {
-              if (e.detail) setEndLocation(e.detail.value);
-            }}
-          ></IonInput>
+            <IonLabel position="floating">Starting Location</IonLabel>
+            <IonInput
+              required
+              type="text"
+              onIonChange={(e: CustomEvent) => {
+                if (e.detail) setStartLocation(e.detail.value);
+              }}
+            ></IonInput>
+            <IonLabel position="floating">End Location</IonLabel>
+            <IonInput
+              type="text"
+              onIonChange={(e: CustomEvent) => {
+                if (e.detail) setEndLocation(e.detail.value);
+              }}
+            ></IonInput>
           </IonCardContent>
         </IonCard>
         <IonCard>
@@ -189,72 +189,72 @@ const InputForm: React.FC = () => {
           </IonCardContent>
         </IonCard>
 
-        <IonCard>   
+        <IonCard>
           <IonCardHeader>
-          <IonCardTitle>Price Range</IonCardTitle>       
+            <IonCardTitle>Price Range</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-          <IonSegment
-            onIonChange={e => {
-              if (typeof e.detail.value === 'string') {
-                setBudget(e.detail.value);
-              }
-            }}
-          >
-            <IonSegmentButton value="$">
-              <IonLabel>$</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="$$">
-              <IonLabel>$$</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="$$$">
-              <IonLabel>$$$</IonLabel>
-            </IonSegmentButton>
-          </IonSegment>
+            <IonSegment
+              onIonChange={e => {
+                if (typeof e.detail.value === 'string') {
+                  setBudget(e.detail.value);
+                }
+              }}
+            >
+              <IonSegmentButton value="$">
+                <IonLabel>$</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="$$">
+                <IonLabel>$$</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="$$$">
+                <IonLabel>$$$</IonLabel>
+              </IonSegmentButton>
+            </IonSegment>
           </IonCardContent>
         </IonCard>
         <IonCard>
           <IonCardHeader>
-          <IonCardTitle>Categories</IonCardTitle>
+            <IonCardTitle>Categories</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-          <IonList>
-            {showTags.map(({ val, text, isChecked }) => (
-              <IonItem key={val}>
-                <IonLabel>{text}</IonLabel>
-                <IonCheckbox
-                  slot="end"
-                  value={val}
-                  checked={isChecked}
-                  onIonChange={e => {
-                    if (e.detail.checked) {
-                      const newTags = [...tags, e.detail.value];
-                      const newShowTags = showTags.map((tag: Tag) => {
-                        if (tag.val === e.detail.value) {
-                          tag.isChecked = true;
-                        }
-                        return tag;
-                      });
-                      setTags(newTags);
-                      setShowTags(newShowTags);
-                    } else {
-                      const newTags = tags.filter((tag: string) => {
-                        if (tag !== e.detail.value) return tag;
-                      });
-                      const newShowTags = showTags.map((tag: Tag) => {
-                        if (tag.val === e.detail.value) {
-                          tag.isChecked = false;
-                        }
-                        return tag;
-                      });
-                      setTags(newTags);
-                      setShowTags(newShowTags);
-                    }
-                  }}
-                />
-              </IonItem>
-            ))}
-          </IonList>
+            <IonList>
+              {showTags.map(({ val, text, isChecked }) => (
+                <IonItem key={val}>
+                  <IonLabel>{text}</IonLabel>
+                  <IonCheckbox
+                    slot="end"
+                    value={val}
+                    checked={isChecked}
+                    onIonChange={e => {
+                      if (e.detail.checked) {
+                        const newTags = [...tags, e.detail.value];
+                        const newShowTags = showTags.map((tag: Tag) => {
+                          if (tag.val === e.detail.value) {
+                            tag.isChecked = true;
+                          }
+                          return tag;
+                        });
+                        setTags(newTags);
+                        setShowTags(newShowTags);
+                      } else {
+                        const newTags = tags.filter((tag: string) => {
+                          if (tag !== e.detail.value) return tag;
+                        });
+                        const newShowTags = showTags.map((tag: Tag) => {
+                          if (tag.val === e.detail.value) {
+                            tag.isChecked = false;
+                          }
+                          return tag;
+                        });
+                        setTags(newTags);
+                        setShowTags(newShowTags);
+                      }
+                    }}
+                  />
+                </IonItem>
+              ))}
+            </IonList>
           </IonCardContent>
         </IonCard>
         <IonButton type="submit" expand="block">

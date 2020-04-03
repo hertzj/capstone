@@ -31,6 +31,8 @@ const Tab2: React.FC = itinerary => {
     //@ts-ignore
     state => state.activityInstances.scheduledActivities
   );
+  //@ts-ignore
+  const currentItinerary = useSelector(state => state.planningItinerary);
   // @ts-ignore
   const options = useSelector(state => state.activityInstances.otherOptions);
   console.log('scheduled on tab2: ', scheduled);
@@ -159,7 +161,11 @@ const Tab2: React.FC = itinerary => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Current Itinerary</IonTitle>
+          <IonTitle>
+            {currentItinerary.name
+              ? currentItinerary.name
+              : 'Itinerary Building in Progress'}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent scrollEvents={true}>{makeListOfActivities()}</IonContent>

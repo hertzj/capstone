@@ -30,7 +30,7 @@ const initialState: User = {
   lastName: '',
   city: '',
   email: '',
-  itineraries: []
+  itineraries: [],
 };
 
 export const setUser = (user: User): UserAction => {
@@ -85,7 +85,8 @@ export const signUpThunk = (
           key: storageKey,
           value: res.data.token,
         });
-        return dispatch(setUser(res.data.user));
+        dispatch(setUser(res.data.user));
+        window.location.href = '/home';
       })
       .catch(e => {
         console.log('error posting user');
