@@ -49,10 +49,10 @@ const Map: React.FC = () => {
     lng,
   };
 
-  const [location, setLocation] = useState({
-    lat: 0,
-    lng: 0,
-  });
+  // const [location, setLocation] = useState({
+  //   lat: 0,
+  //   lng: 0,
+  // });
 
   const options = {
     strokeColor: '#0000FF',
@@ -67,20 +67,20 @@ const Map: React.FC = () => {
     radius: 20,
     zIndex: 1,
   };
-  useIonViewWillEnter(async () => {
-    const geo = await Geolocation.getCurrentPosition()
-      .then(geo => {
-        const { latitude, longitude } = geo.coords;
-        setLocation({
-          lat: latitude,
-          lng: longitude,
-        });
-      })
-      .catch(e => {
-        console.log('error finding user');
-        console.error(e);
-      });
-  });
+  // useIonViewWillEnter(async () => {
+  //   const geo = await Geolocation.getCurrentPosition()
+  //     .then(geo => {
+  //       const { latitude, longitude } = geo.coords;
+  //       setLocation({
+  //         lat: latitude,
+  //         lng: longitude,
+  //       });
+  //     })
+  //     .catch(e => {
+  //       console.log('error finding user');
+  //       console.error(e);
+  //     });
+  // });
 
   const scheduled = useSelector(
     //@ts-ignore
@@ -95,7 +95,7 @@ const Map: React.FC = () => {
         zoom={10}
         center={center}
       >
-        <Circle options={options} center={location} radius={10} />
+        {/* <Circle options={options} center={location} radius={10} /> */}
         {scheduled.map((activity: ItineraryActivity, idx: number) => {
           const position: Position = scheduleToPosition(activity);
           const { name } = activity;

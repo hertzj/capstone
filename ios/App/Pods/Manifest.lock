@@ -1,51 +1,22 @@
 PODS:
-  - Capacitor (1.5.0):
-    - CapacitorCordova (= 1.5.0)
-  - CapacitorCordova (1.5.0)
-  - CodetrixStudioCapacitorGoogleAuth (0.0.1):
-    - Capacitor
-    - GoogleSignIn (< 5)
-  - GoogleSignIn (4.4.0):
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
-    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.2.2):
-    - GoogleToolboxForMac/Defines (= 2.2.2)
-  - GoogleToolboxForMac/Defines (2.2.2)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.2)":
-    - GoogleToolboxForMac/DebugUtils (= 2.2.2)
-    - GoogleToolboxForMac/Defines (= 2.2.2)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.2)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.2.2)"
-  - GTMSessionFetcher/Core (1.3.1)
+  - Capacitor (1.5.2):
+    - CapacitorCordova (= 1.5.2)
+  - CapacitorCordova (1.5.2)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
-  - "CodetrixStudioCapacitorGoogleAuth (from `../../node_modules/@codetrix-studio/capacitor-google-auth`)"
-
-SPEC REPOS:
-  trunk:
-    - GoogleSignIn
-    - GoogleToolboxForMac
-    - GTMSessionFetcher
 
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
-  CodetrixStudioCapacitorGoogleAuth:
-    :path: "../../node_modules/@codetrix-studio/capacitor-google-auth"
 
 SPEC CHECKSUMS:
-  Capacitor: 667658ab58e5a2e8465238eef7c6c5df46738688
-  CapacitorCordova: 5b03f0b903bf066a8f3187e848252227190b681a
-  CodetrixStudioCapacitorGoogleAuth: a3490dd09630467854cacdedf46146def4225bfc
-  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
-  GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
-  GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
+  Capacitor: 766f325ada7f069fffd14ab8b2e9a13deb171930
+  CapacitorCordova: a1b20704e399e5ca751e48a800309d09cc3a39b4
 
-PODFILE CHECKSUM: 8bcf56d16a4b560bca318059ddc159b0dfc96a80
+PODFILE CHECKSUM: 96b0fbb362791bfbdc248771b2a61f0d83cddd19
 
 COCOAPODS: 1.8.4

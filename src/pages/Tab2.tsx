@@ -51,6 +51,7 @@ const Tab2: React.FC = itinerary => {
           types: any;
           startTime: any;
           endTime: any;
+          travel_time_minutes: any;
         }) => {
           let backgroundImageUrl;
           if (singleActivity.types[0] !== 'transit') {
@@ -93,38 +94,61 @@ const Tab2: React.FC = itinerary => {
                     <IonLabel color="light">Activity</IonLabel>
                   )}
                 </IonChip>
-                <IonCardSubtitle
-                  style={{
-                    color: 'primary',
-                    paddingTop: '5px',
-                  }}
-                >
-                  Start Time
-                </IonCardSubtitle>
-                <IonCardTitle
-                  style={{
-                    color: '#ffffff',
-                    fontSize: '14px',
-                  }}
-                >
-                  {singleActivity.startTime}
-                </IonCardTitle>
-                <IonCardSubtitle
-                  style={{
-                    color: 'primary',
-                    paddingTop: '5px',
-                  }}
-                >
-                  End Time
-                </IonCardSubtitle>
-                <IonCardTitle
-                  style={{
-                    color: '#ffffff',
-                    fontSize: '14px',
-                  }}
-                >
-                  {singleActivity.endTime}
-                </IonCardTitle>
+                {singleActivity.types[0] !== 'transit' ? (
+                  <>
+                    <IonCardSubtitle
+                      style={{
+                        color: 'primary',
+                        paddingTop: '5px',
+                      }}
+                    >
+                      Start Time
+                    </IonCardSubtitle>
+                    <IonCardTitle
+                      style={{
+                        color: '#ffffff',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {singleActivity.startTime}
+                    </IonCardTitle>
+                    <IonCardSubtitle
+                      style={{
+                        color: 'primary',
+                        paddingTop: '5px',
+                      }}
+                    >
+                      End Time
+                    </IonCardSubtitle>
+                    <IonCardTitle
+                      style={{
+                        color: '#ffffff',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {singleActivity.endTime}
+                    </IonCardTitle>
+                  </>
+                ) : (
+                  <>
+                    <IonCardSubtitle
+                      style={{
+                        color: 'primary',
+                        paddingTop: '5px',
+                      }}
+                    >
+                      Travel Time
+                    </IonCardSubtitle>
+                    <IonCardTitle
+                      style={{
+                        color: '#ffffff',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {singleActivity.travel_time_minutes} minutes
+                    </IonCardTitle>
+                  </>
+                )}
               </IonCardContent>
             </IonCard>
           );
