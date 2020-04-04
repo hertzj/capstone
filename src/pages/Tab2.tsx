@@ -25,6 +25,7 @@ import { ItineraryActivity } from '../redux/activityInstances';
 import { url } from 'inspector';
 import { withRouter } from 'react-router';
 import { types } from 'util';
+import moment from 'moment';
 
 const Tab2: React.FC = itinerary => {
   const scheduled = useSelector(
@@ -56,23 +57,23 @@ const Tab2: React.FC = itinerary => {
           let backgroundImageUrl;
           if (singleActivity.types[0] !== 'transit') {
             backgroundImageUrl = singleActivity.images.length
-              ? `url(${singleActivity.images[0]})`
-              : `url(https://cdn.vox-cdn.com/thumbor/YQVObtsv5vFSxMWPZOxyzPnT3ZE=/0x0:2000x1333/1200x900/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/58405263/171109_08_17_25_5DSR4719.0.jpg)`;
+              ? `${singleActivity.images[0]}`
+              : `https://cdn.vox-cdn.com/thumbor/YQVObtsv5vFSxMWPZOxyzPnT3ZE=/0x0:2000x1333/1200x900/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/58405263/171109_08_17_25_5DSR4719.0.jpg`;
           } else {
-            backgroundImageUrl = null;
+            backgroundImageUrl = `https://cdn.dribbble.com/users/1052154/screenshots/6643893/d1.jpg`;
           }
 
           return (
             <IonCard
-              style={{
-                backgroundImage: { backgroundImageUrl },
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                fontSize: 22,
-                height: '300px',
-              }}
-            >
+            // style={{
+            //   "background-image": { backgroundImageUrl },
+            //   backgroundPosition: 'center',
+            //   backgroundRepeat: 'no-repeat',
+            //   backgroundSize: 'cover',
+            //   fontSize: 22,
+            //   height: '300px',
+            // }}
+            > <img src={backgroundImageUrl} />
               <IonCardContent
                 style={{
                   height: '100%',
@@ -91,8 +92,8 @@ const Tab2: React.FC = itinerary => {
                   {singleActivity.types ? (
                     <IonLabel color="light">{singleActivity.types[0]}</IonLabel>
                   ) : (
-                    <IonLabel color="light">Activity</IonLabel>
-                  )}
+                      <IonLabel color="light">Activity</IonLabel>
+                    )}
                 </IonChip>
                 {singleActivity.types[0] !== 'transit' ? (
                   <>
@@ -110,7 +111,7 @@ const Tab2: React.FC = itinerary => {
                         fontSize: '14px',
                       }}
                     >
-                      {singleActivity.startTime}
+                      {moment(singleActivity.startTime, "hh:mm:ss").format("h:mm A")}
                     </IonCardTitle>
                     <IonCardSubtitle
                       style={{
@@ -126,29 +127,29 @@ const Tab2: React.FC = itinerary => {
                         fontSize: '14px',
                       }}
                     >
-                      {singleActivity.endTime}
+                      {moment(singleActivity.endTime, "hh:mm:ss").format("h:mm A")}
                     </IonCardTitle>
                   </>
                 ) : (
-                  <>
-                    <IonCardSubtitle
-                      style={{
-                        color: 'primary',
-                        paddingTop: '5px',
-                      }}
-                    >
-                      Travel Time
+                    <>
+                      <IonCardSubtitle
+                        style={{
+                          color: 'primary',
+                          paddingTop: '5px',
+                        }}
+                      >
+                        Travel Time
                     </IonCardSubtitle>
-                    <IonCardTitle
-                      style={{
-                        color: '#ffffff',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {singleActivity.travel_time_minutes} minutes
+                      <IonCardTitle
+                        style={{
+                          color: '#ffffff',
+                          fontSize: '14px',
+                        }}
+                      >
+                        {singleActivity.travel_time_minutes} minutes
                     </IonCardTitle>
-                  </>
-                )}
+                    </>
+                  )}
               </IonCardContent>
             </IonCard>
           );
@@ -156,30 +157,6 @@ const Tab2: React.FC = itinerary => {
       );
     }
   };
-
-  // {
-  //   scheduled.map((activity: ItineraryActivity) => {
-  //     if (activity.types === 'transit') {
-  //       // or whatever we call it
-  //       // return some code to show the transit
-  //     }
-  //     // just a guess for what the below would be like. I'm sure you all have better ideas than I do
-  //     else if (activity.images) {
-  //       return (
-  //         <IonItem>
-  //           {activity.images.length ? (
-  //             <IonImg src={activity.images[0]}></IonImg>
-  //           ) : (
-  //               ''
-  //             )}
-  //           <IonLabel>
-  //             {activity.name} from {activity.startTime} to {activity.endTime}{' '}
-  //           </IonLabel>
-  //         </IonItem>
-  //       );
-  //     }
-  //   });
-  // }
 
   return (
     <IonPage>
