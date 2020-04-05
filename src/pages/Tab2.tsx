@@ -65,15 +65,15 @@ const Tab2: React.FC = itinerary => {
 
           return (
             <IonCard
-            // style={{
-            //   "background-image": { backgroundImageUrl },
-            //   backgroundPosition: 'center',
-            //   backgroundRepeat: 'no-repeat',
-            //   backgroundSize: 'cover',
-            //   fontSize: 22,
-            //   height: '300px',
-            // }}
-            > <img src={backgroundImageUrl} />
+            style={{
+                backgroundImage: `url(${backgroundImageUrl})`,
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              fontSize: 22,
+              height: '300px',
+            }}
+            > 
               <IonCardContent
                 style={{
                   height: '100%',
@@ -90,7 +90,7 @@ const Tab2: React.FC = itinerary => {
                 </IonCardTitle>
                 <IonChip>
                   {singleActivity.types ? (
-                    <IonLabel color="light">{singleActivity.types[0]}</IonLabel>
+                    <IonLabel color="light">{singleActivity.types[1]}</IonLabel>
                   ) : (
                       <IonLabel color="light">Activity</IonLabel>
                     )}
@@ -99,7 +99,7 @@ const Tab2: React.FC = itinerary => {
                   <>
                     <IonCardSubtitle
                       style={{
-                        color: 'primary',
+                        color: '#f4ab9a',
                         paddingTop: '5px',
                       }}
                     >
@@ -115,7 +115,7 @@ const Tab2: React.FC = itinerary => {
                     </IonCardTitle>
                     <IonCardSubtitle
                       style={{
-                        color: 'primary',
+                        color: '#f4ab9a',
                         paddingTop: '5px',
                       }}
                     >

@@ -20,6 +20,5 @@ font-family:'IBM Plex Sans', sans-serif;
 }
 
 ion-chip{
-  color:red !important;
-  background-color:rgba(42, 148, 146, 0.7);
+  background-color:rgba(244,171,154, 0.7);
 }
